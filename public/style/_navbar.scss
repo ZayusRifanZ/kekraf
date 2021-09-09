@@ -1,0 +1,50 @@
+// * {
+//   border: 1px solid;
+// }
+.navbar-kekraf {
+  color: #ffbd08;
+  padding-top: 15px;
+
+  &.active {
+    color: brown;
+  }
+  @include media-breakpoint-down(md) {
+    background-color: #fff !important;
+  }
+  .nav-item {
+    &.active {
+      .nav-link {
+        color: #3e6bb3;
+      }
+    }
+    .nav-link {
+      color: #6c757d;
+    }
+    .nav-link {
+      @include media-breakpoint-up(lg) {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .card-badge {
+    display: inline-block;
+    position: relative;
+    top: -8px;
+    min-width: 2em;
+    padding: 0.3em;
+    border-radius: 50%;
+    font-size: 10px;
+    text-align: center;
+    background: #3e6bb3;
+    color: #fefefe;
+    margin-left: -10px;
+    // top: 0;
+  }
+}
+
+.navbar-fixed-top.scrolled {
+  background-color: #fff !important;
+  transition: background-color 200ms linear;
+}

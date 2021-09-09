@@ -1,0 +1,25 @@
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.page-content {
+    margin-top: 100px;
+}
+
+footer {
+    .container {
+        border-top: 1px solid #8693a9;
+        margin-top: 150px;
+
+        p {
+            color: #8693a9;
+            a {
+                text-decoration: none;
+                color: #8693a9;
+                &:hover {
+                    color: #3e6bb3;
+                }
+            }
+        }
+    }
+}

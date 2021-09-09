@@ -1,0 +1,37 @@
+.page-auth {
+  .row-login {
+    min-height: 70vh;
+  }
+
+  .kekraf-login {
+    h5 {
+      margin-top: 20px;
+      font-size: 25px;
+      font-weight: 500;
+      color: #00173d;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      background-color: #f4f4f4;
+    }
+    label {
+      font-size: 16px;
+      color: #00173d;
+    }
+    .btn-auth-login {
+      margin-top: 50px;
+      .btn {
+        border-radius: 10px;
+      }
+      .btn-register {
+        @include button-variant(#f4f4f4, transparent);
+        color: #8693a9;
+
+        @include media-breakpoint-down(md) {
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}

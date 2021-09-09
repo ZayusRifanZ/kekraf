@@ -1,0 +1,18 @@
+.page-success {
+  .row-login {
+    min-height: 75vh;
+  }
+  .kekraf-success {
+    h2 {
+      font-size: 25px;
+      font-weight: 200;
+      color: #00173d;
+      margin-top: 0;
+    }
+
+    .btn-singup {
+      @include button-variant(#f3f3f3, transparent);
+      color: #bbbbbb;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.kekraf-breadcrumbs {
+  .breadcrumb {
+    background-color: transparent;
+    padding: 10px 0;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .breadcrumb-item.active {
+    color: #00173d;
+  }
+  a {
+    color: #8693a9;
+  }
+}

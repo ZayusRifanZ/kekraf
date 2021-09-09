@@ -1,0 +1,41 @@
+.component-products {
+  margin-bottom: 20px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  .product-thumnail {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &:hover,
+    &:focus {
+      .product-image {
+        transform: scale(1.1);
+      }
+    }
+    .product-image {
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: all 0.3s ease;
+    }
+  }
+  .product-text {
+    margin-top: 10px;
+    color: #3e6bb3;
+    font-size: 15px;
+  }
+  .product-price {
+    font-weight: 600;
+    font-size: 18px;
+    color: #38465b;
+  }
+}

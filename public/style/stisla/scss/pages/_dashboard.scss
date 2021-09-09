@@ -1,0 +1,73 @@
+.section {
+  .dashboard-content {
+    .dashboard-card-title {
+      font-size: 16px;
+      color: #8693a9;
+      font-weight: normal;
+    }
+    .dashboard-card-subtitle {
+      font-size: 32px;
+      color: color(secondary);
+      font-weight: 600;
+    }
+
+    .card-list {
+      .card-body {
+        font-size: 18px;
+        color: color(secondary);
+        font-weight: normal;
+      }
+      img {
+        border-radius: 8px;
+      }
+    }
+    .product-title {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 25px;
+      color: color(coogrey);
+    }
+
+    .product-subtitle {
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 30px;
+      color: color(secondary);
+      margin-bottom: 20px;
+    }
+
+    .detail-transaction-img {
+      border-radius: 10px;
+    }
+
+    .nav-pills {
+      .nav-link {
+        font-weight: normal;
+        font-size: 18px;
+        color: #9191a9;
+        border-radius: 0;
+
+        &.active {
+          font-weight: 500;
+          font-size: 18px;
+          color: color(secondary);
+          border-bottom: 3px solid color(secondary);
+          background: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    .gallery-container {
+      img {
+        border-radius: 10px;
+      }
+      .delete-gallery {
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: 0;
+      }
+    }
+  }
+}

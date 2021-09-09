@@ -1,0 +1,97 @@
+.kekraf-detail {
+  img {
+    border-radius: 10px;
+  }
+  .horizontal-scrollable > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .horizontal-scrollable > .row > .col {
+    display: inline-block;
+    float: none;
+  }
+
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  .thumbnail-image {
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+
+    &:hover,
+    &.active {
+      border: 2px solid #ff7158;
+    }
+  }
+
+  .product {
+    font-weight: 500;
+    font-size: 20px;
+    color: #3e6bb3;
+  }
+
+  .store {
+    font-weight: normal;
+    font-size: 16px;
+    color: #00173d;
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+
+  .price {
+    font-weight: 500;
+    font-size: 24px;
+    color: #3e6bb3;
+  }
+  .sum-buying {
+    font-weight: normal;
+    font-size: 16px;
+    color: #00173d;
+  }
+
+  .description {
+    margin-top: 15px;
+    font-weight: normal;
+    font-size: 16px;
+
+    color: #38465b;
+  }
+
+  .btn-custom-primary {
+    margin-top: 50px;
+    height: 45px;
+    background-color: #3e6bb3;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+.store-review {
+  .media {
+    img {
+      max-width: 50px;
+    }
+  }
+
+  .media-body {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 180%;
+    color: #525252;
+    margin-bottom: 20px;
+    h5 {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 180%;
+      color: #0c0d36;
+    }
+  }
+}
