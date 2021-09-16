@@ -22,7 +22,7 @@ Route::get('/success', 'CartController@success')->name('success');
 
 Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
 
-Route::get('/dashboard', 'DashboardContoller@index')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/dashboard/products', 'DashboardProductController@index')->name('dashboard-product');
 Route::get('/dashboard/products/create', 'DashboardProductController@create')->name('dashboard-product-create');
@@ -34,8 +34,21 @@ Route::get('/dashboard/transaction/{id}', 'DashboardTransactionController@detail
 Route::get('/dashboard/setting', 'DashboardSettingController@store')->name('dashboard-setting-store');
 Route::get('/dashboard/account', 'DashboardSettingController@account')->name('dashboard-setting-account');
 
+// ->middleware(['auth', 'admin'])
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->group(function(){
+        Route::get('/', 'DashboardController@index')->name('dashboard-admin');
+        Route::resource('category', 'CategoryController');
+    });
+
+    
 
 
+
+Route::get('/tes', function () {
+    return view('pages.admin.category.tes');
+});
 
 Auth::routes();
 
