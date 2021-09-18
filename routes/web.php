@@ -40,6 +40,7 @@ Route::prefix('admin')
     ->group(function(){
         Route::get('/', 'DashboardController@index')->name('dashboard-admin');
         Route::resource('category', 'CategoryController');
+        Route::resource('user', 'UserController');
     });
 
     
@@ -47,7 +48,7 @@ Route::prefix('admin')
 
 
 Route::get('/tes', function () {
-    return view('pages.admin.category.tes');
+    return view('pages.admin.user.index');
 });
 
 Auth::routes();

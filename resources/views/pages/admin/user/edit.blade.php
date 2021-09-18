@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Kekraf - Category Admin - edit
+    Kekraf - User Admin - edit
 @endsection
 
 @section('content')
@@ -9,8 +9,8 @@
 <div class="main-content" data-aos="fade-up">
     <section class="section container-fluid">
       <div class="section-header">
-        <h1>Kategori</h1>
-        <p>Edit Kategori {{ $item->name }} 
+        <h1>Pengguna</h1>
+        <p>Edit Data Pengguna - {{ $item->name }} 
         </p>
       </div>
 
@@ -30,7 +30,7 @@
               <div class="card">
                 <div class="card-body">
                  <form 
-                  action="{{ route('category.update', $item->id) }}" 
+                  action="{{ route('user.update', $item->id) }}" 
                   method="POST" 
                   enctype="multipart/form-data"
                   >
@@ -39,14 +39,31 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label >Nama Kategori</label>
-                        <input type="text" name="name" class="form-control" value="{{ $item->name }}" required>
+                        <label >Nama User</label>
+                        <input type="text" name="name" class="form-control" required value="{{ $item->name }}">
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label >Foto</label>
-                      <input type="file" name="photo" class="form-control">
+                        <label >Email User</label>
+                        <input type="email" name="email" class="form-control" required value="{{ $item->email }}">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label >Password User</label>
+                        <input type="password" name="password" class="form-control">
+                        <small class="text-warning">Kosongkan jika tidak ingin mengganti password !</small>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label >Role</label>
+                        <select name="roles" required class="form-control">
+                          <option value="{{ $item->roles }}" selected >Tidak diganti</option>
+                          <option value="ADMIN">Admin</option>
+                          <option value="USER">User</option>
+                        </select>
                       </div>
                     </div>
                   </div>

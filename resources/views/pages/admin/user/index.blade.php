@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Kekraf - Category Admin
+    Kekraf - User Admin
 @endsection
 
 @section('content')
   <div class="main-content" data-aos="fade-up">
     <section class="section container-fluid">
       <div class="section-header">
-        <h1>Kategori</h1>
-        <p>Daftar Kategori</p>
+        <h1>Pengguna</h1>
+        <p>Daftar Pengguna</p>
       </div>
 
       <div class="section-body">
@@ -18,8 +18,8 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
-                  <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">
-                    + Tambah Kategori Baru 
+                  <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">
+                    + Tambah Pengguna Baru 
                   </a>
                   <div class="table-responsive">
                     <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
@@ -27,12 +27,16 @@
                         <tr>
                           <th>ID</th>
                           <th>Name</th>
-                          <th>Foto</th>
-                          <th>Slug</th>
+                          <th>Email</th>
+                          <th>Role</th>
                           <th>Aksi</th>
                         </tr>
                       </thead> 
-                      <tbody></tbody>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
                     </table>
                   </div>
                 </div>
@@ -49,6 +53,7 @@
 
 @push('addon-script')
   <script>
+    var i =1;
     var datatable = $('#crudTable').DataTable({
       processing: true,
       serverSide: true,
@@ -63,8 +68,8 @@
           } 
         },
         { data: 'name', name:'name'},
-        { data: 'photo', name:'photo'},
-        { data: 'slug', name:'slug'},
+        { data: 'email', name:'email'},
+        { data: 'roles', name:'roles'},
         { 
           data: 'action', 
           name:'action',

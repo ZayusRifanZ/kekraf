@@ -113,10 +113,10 @@
                   <span>Transaksi</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
+              <li class="nav-item {{ (request()->is('admin/user*')) ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}" class="nav-link">
                   <i class="fas fa-user"></i>
-                  <span>Users</span>
+                  <span>Pengguna</span>
                 </a>
               </li>
 
