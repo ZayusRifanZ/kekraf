@@ -95,8 +95,8 @@
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link">
+              <li class="nav-item {{ (request()->is('admin/product*')) ? 'active' : '' }}" >
+                <a href="{{ route('product.index') }}" class="nav-link">
                   <i class="fas fa-chart-area"></i>
                   <span>Produk </span>
                 </a>
@@ -126,7 +126,7 @@
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
               <a
                 href="{{ route('home') }}"
-                class="btn btn-primary btn-lg btn-block btn-icon-split"
+                class="btn btn-outline-danger btn-lg btn-block btn-icon-split"
               >
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
