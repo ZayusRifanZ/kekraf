@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -125,7 +126,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
         $data = $request->all();
         
@@ -133,10 +134,7 @@ class UserController extends Controller
 
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
-        }
-
-        else
-        {
+        } else {
             unset($data['password']);
         }
 
