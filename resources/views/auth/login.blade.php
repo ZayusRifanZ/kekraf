@@ -19,37 +19,54 @@
             </div>
             <div class="col-md-6">
               <h5>Masuk ke akun anda</h5>
-              <form action="" class="mt-3">
+              <form method="POST" action="{{ route('login') }}" class="mt-3">
+                @csrf
                 <div class="form-group">
                   <label for="">Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    class="form-control"
-                  />
+                  <input 
+                    id="email" 
+                    type="email" 
+                    class="form-control @error('email') is-invalid @enderror" 
+                    name="email" value="{{ old('email') }}" 
+                    required autocomplete="email" autofocus
+                  >
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+
+
                 </div>
                 <div class="form-group">
-                  <label for="">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    class="form-control"
-                  />
+                  <label for="password">Password</label>
+                  <input 
+                    id="password" 
+                    type="password" 
+                    class="form-control @error('password') is-invalid @enderror" 
+                    name="password" required autocomplete="current-password"
+                  >
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
                 <div class="row btn-auth-login">
                   <div class="col-lg-6">
-                    <a
-                      href="{{ route('dashboard') }}"
+                    <button
+                      type="submit"
                       class="btn btn-primary btn-block p-2"
-                      >Masuk</a
-                    >
+                      >Masuk
+                    </button>
                   </div>
                   <div class="col-lg-6">
-                    <a href="{{ route('register') }}" class="btn btn-register btn-block"
-                      >Daftar</a
-                    >
+                    <a 
+                      href="{{ route('register') }}" 
+                      class="btn btn-register btn-block"
+                      >
+                      Daftar
+                    </a>
                   </div>
                 </div>
               </form>

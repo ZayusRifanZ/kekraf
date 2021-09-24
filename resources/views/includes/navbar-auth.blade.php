@@ -7,7 +7,7 @@
       data-aos="fade-down"
     >
       <div class="container">
-        <a href="index.html">
+        <a href="{{ route('home') }}">
           <img src="/images/logo.svg" alt="" />
         </a>
 
@@ -32,17 +32,6 @@
               <a class="nav-link" href="#"> Reward </a>
             </li>
           </ul>
-          {{-- <ul class="navbar-nav ml-auto">
-            
-            <li class="nav-item">
-              <a class="nav-link btn btn-outline-primary" href="register.html">
-                Daftar
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link btn btn-primary" href="login.html">Masuk</a>
-            </li>
-          </ul> --}}
         </div>
       </div>
     </nav>
