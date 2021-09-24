@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 use App\Http\Requests\Admin\CategoryRequest;
-
+use App\Http\Requests\Admin\UpdateCategoryRequest;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
@@ -28,30 +28,18 @@ class CategoryController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function($item) {
                     return '
+                        <a href="' . route('category.edit', $item->id) . '" class="btn btn-primary">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
                         <div class="btn-group">
-                            <div class="dropdown">
-                                <button 
-                                    class="btn btn-primary dropdown-toggle mr-1 mb-1"
-                                    type="button" 
-                                    data-toggle="dropdown">
-                                        Aksi
+                            <form 
+                                action="'. route('category.destroy', $item->id) .'"
+                                method="POST">
+                                '. method_field('delete') . csrf_field() .'
+                                <button type="submit" class="btn btn-danger" >
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
-                                <div class="dropdown-menu">
-                                    <a 
-                                        href="' . route('category.edit', $item->id) . '" 
-                                        class="dropdown-item" style="font-size:16px; font-weight:400">
-                                        Edit
-                                    </a>
-                                    <form 
-                                        action="'. route('category.destroy', $item->id) .'"
-                                        method="POST">
-                                        '. method_field('delete') . csrf_field() .'
-                                        <button type="submit" class="dropdown-item text-danger" >
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     ';
                 })
@@ -91,13 +79,13 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('asset/category', 'public');
+        $data['photo'] = $request->file('photo')->store('assets/category', 'public');
         
         // echo "<pre>";var_dump($data);die; (for check data in php);
 
         Category::create($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('message', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -133,18 +121,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
         $data = $request->all();
 
-        $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('asset/category', 'public');
-        
         $item = Category::findOrFail($id);
+        $data['slug'] = Str::slug($request->name);
+        
+        if (isset($request->photo)){
+            Storage::disk('local')->delete('public/'.$item->photo);
+            $data['photo'] = $request->file('photo')->store('assets/category', 'public');
+        }
+
 
         $item->update($data);
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('message', 'Data berhasil diubah');
     }
 
     /**
@@ -158,6 +150,6 @@ class CategoryController extends Controller
         $item = Category::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('message', 'Data berhasil dihapus');
     }
 }

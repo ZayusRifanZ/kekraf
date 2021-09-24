@@ -28,4 +28,13 @@ class CategoryRequest extends FormRequest
             'photo' => 'required|image',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama kategori harus diisi',
+            'photo.required' => 'Foto kategori harus diisi',
+            'photo.image' => 'Foto kategori harus berupa format gambar'
+        ];
+    }
 }

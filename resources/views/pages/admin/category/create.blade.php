@@ -17,15 +17,6 @@
         <div class="dashboard-content">
           <div class="row">
             <div class="col-md-12">
-              @if($errors->any())
-                <div class="alert alert-danger">
-                  <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                    @endforeach
-                  </ul>
-                </div>
-              @endif
               <div class="card">
                 <div class="card-body">
                  <form 
@@ -38,13 +29,19 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label >Nama Kategori</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" class="form-control" >
+                         @error('name')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="form-group">
                         <label >Foto</label>
-                      <input type="file" name="photo" class="form-control" required>
+                        <input type="file" name="photo" class="form-control" >
+                         @error('photo')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                       </div>
                     </div>
                   </div>
