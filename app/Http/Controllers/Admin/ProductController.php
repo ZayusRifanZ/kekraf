@@ -33,31 +33,20 @@ class ProductController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function($item) {
                     return '
+                        <a href="' . route('product.edit', $item->id) . '" class="btn btn-primary">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
                         <div class="btn-group">
-                            <div class="dropdown">
-                                <button 
-                                    class="btn btn-primary dropdown-toggle mr-1 mb-1"
-                                    type="button" 
-                                    data-toggle="dropdown">
-                                        Aksi
+                            <form 
+                                action="'. route('product.destroy', $item->id) .'"
+                                method="POST">
+                                '. method_field('delete') . csrf_field() .'
+                                <button type="submit" class="btn btn-danger" >
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
-                                <div class="dropdown-menu">
-                                    <a 
-                                        href="' . route('product.edit', $item->id) . '" 
-                                        class="dropdown-item" style="font-size:16px; font-weight:400">
-                                        Edit
-                                    </a>
-                                    <form 
-                                        action="'. route('product.destroy', $item->id) .'"
-                                        method="POST">
-                                        '. method_field('delete') . csrf_field() .'
-                                        <button type="submit" class="dropdown-item text-danger" >
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                            </form>
                         </div>
+                        
                     ';
                 })
                 
@@ -98,7 +87,7 @@ class ProductController extends Controller
 
         Product::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('message', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -148,7 +137,7 @@ class ProductController extends Controller
         
         $item->update($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('message', 'Data berhasil diubah');
     }
 
     /**
@@ -162,6 +151,6 @@ class ProductController extends Controller
         $item = Product::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('message', 'Data berhasil dihapus');
     }
 }
