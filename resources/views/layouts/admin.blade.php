@@ -95,10 +95,16 @@
                 </a>
               </li>
 
-              <li class="nav-item {{ (request()->is('admin/product*')) ? 'active' : '' }}" >
+              <li class="nav-item {{ (request()->is('admin/product')) ? 'active' : '' }}" >
                 <a href="{{ route('product.index') }}" class="nav-link">
                   <i class="fas fa-chart-area"></i>
                   <span>Produk </span>
+                </a>
+              </li>
+              <li class="nav-item {{ (request()->is('admin/product-gallery*')) ? 'active' : '' }}" >
+                <a href="{{ route('product-gallery.index') }}" class="nav-link">
+                  <i class="fas fa-image"></i>
+                  <span>Galeri Produk </span>
                 </a>
               </li>
               <li class="nav-item {{ (request()->is('admin/category*')) ? 'active' : '' }}">
