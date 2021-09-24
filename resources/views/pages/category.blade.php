@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-  <div class="page-content page-categories">
+  <div class="page-content page-home">
     <!-- categori -->
     <section class="kekraf-category-product">
       <div class="container">
@@ -23,7 +23,10 @@
                 data-aos="fade-up"
                 data-aos-delay="{{ $incrementCategory += 100 }}"
               >
-                <a href="{{ route('categories-detail', $category->slug) }}" class="component-categories d-block">
+                <a 
+                  href="{{ route('categories-detail', $category->slug) }}" 
+                  class="component-categories d-block {{ (request()->is('categories/'.$category->slug)) ? 'active' : '' }}"
+                  >
                   <div class="category-icon">
                     <img src="{{ Storage::url($category->photo) }}" alt="" class="w-100" />
                   </div>

@@ -10841,8 +10841,12 @@ nav form input[type="text"] {
   }
 }
 
+.component-categories.active {
+  background-color: #f4f4f4;
+  border: 2px solid #3e6bb3;
+}
+
 .component-categories {
-  background-color: #fff;
   border-radius: 10px;
   border: 2px solid #c4c4c4;
   padding: 8px 38px 8px 38px;
@@ -10855,6 +10859,10 @@ nav form input[type="text"] {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
   text-decoration: none;
+}
+
+.component-categories .active {
+  background-color: khaki;
 }
 
 .component-categories .category-text {
