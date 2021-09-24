@@ -29,4 +29,14 @@ class UpdateUserRequest extends FormRequest
             'roles' => 'nullable|string|in:ADMIN,USER'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama pengguna harus diisi',
+            'name.max' => 'Nama Pengguna tidak boleh lebih dari 50 karakter',
+            'email.required' => 'Email pengguna harus diisi',
+            'email.email' => 'Email yang diisi tidak sesuai alamat email',
+        ];
+    }
 }

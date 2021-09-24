@@ -29,32 +29,20 @@ class UserController extends Controller
             return Datatables::of($query)
                 ->addColumn('action', function($item) {
                     return '
+                        <a href="' . route('user.edit', $item->id) . '" class="btn btn-primary">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
                         <div class="btn-group">
-                            <div class="dropdown">
-                                <button 
-                                    class="btn btn-primary dropdown-toggle mr-1 mb-1"
-                                    type="button" 
-                                    data-toggle="dropdown">
-                                        Aksi
+                            <form 
+                                action="'. route('user.destroy', $item->id) .'"
+                                method="POST">
+                                '. method_field('delete') . csrf_field() .'
+                                <button type="submit" class="btn btn-danger" >
+                                    <i class="fas fa-trash-alt"></i>
                                 </button>
-                                <div class="dropdown-menu">
-                                    <a 
-                                        href="' . route('user.edit', $item->id) . '" 
-                                        class="dropdown-item" style="font-size:16px; font-weight:400">
-                                        Edit
-                                    </a>
-                                    <form 
-                                        action="'. route('user.destroy', $item->id) .'"
-                                        method="POST">
-                                        '. method_field('delete') . csrf_field() .'
-                                        <button type="submit" class="dropdown-item text-danger" >
-                                            Hapus
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                            </form>
                         </div>
-                    ';
+                            ';
                 })
                 
                 ->rawColumns(['action'])
@@ -90,7 +78,7 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('message', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -140,7 +128,7 @@ class UserController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('message', 'Data berhasil diubah');
     }
 
     /**
@@ -154,6 +142,6 @@ class UserController extends Controller
         $item = User::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('message', 'Data berhasil dihapus');
     }
 }
