@@ -16,83 +16,31 @@
         </div>
 
         <div class="row">
-          <div
-            class="col-4 col-md-3 col-lg-2"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <a href="#" class="component-categories d-block">
-              <div class="category-icon">
-                <img src="/images/food-tray 1.svg" alt="" class="w-100" />
+          @php $incrementCategory = 0; @endphp
+            @forelse ($categories as $category )
+              <div
+                class="col-4 col-md-3 col-lg-2"
+                data-aos="fade-up"
+                data-aos-delay="{{ $incrementCategory += 100 }}"
+              >
+                <a href="{{ route('categories-detail', $category->slug) }}" class="component-categories d-block">
+                  <div class="category-icon">
+                    <img src="{{ Storage::url($category->photo) }}" alt="" class="w-100" />
+                  </div>
+                  <p class="category-text">{{ $category->name }}</p>
+                </a>
               </div>
-              <p class="category-text">Kuliner</p>
-            </a>
-          </div>
-          <div
-            class="col-4 col-md-3 col-lg-2"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <a href="#" class="component-categories d-block">
-              <div class="category-icon">
-                <img src="/images/fashion.svg" alt="" class="w-100" />
-              </div>
-              <p class="category-text">Fasion</p>
-            </a>
-          </div>
-          <div
-            class="col-4 col-md-3 col-lg-2"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <a href="#" class="component-categories d-block">
-              <div class="category-icon">
-                <img src="/images/bird.svg" alt="" class="w-100" />
-              </div>
-              <p class="category-text">Kriya</p>
-            </a>
-          </div>
-          <div
-            class="col-4 col-md-3 col-lg-2"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <a href="#" class="component-categories d-block">
-              <div class="category-icon">
-                <img src="/images/tv&radio.svg" alt="" class="w-100" />
-              </div>
-              <p class="category-text">Tv & Radio</p>
-            </a>
-          </div>
+                
+            @empty
 
-          <div
-            class="col-4 col-md-3 col-lg-2"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <a href="#" class="component-categories d-block">
-              <div class="category-icon">
-                <img src="/images/book.svg" alt="" class="w-100" />
-              </div>
-              <p class="category-text">Penerbitan</p>
-            </a>
-          </div>
-          <div
-            class="col-4 col-md-3 col-lg-2"
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            <a href="#" class="component-categories d-block">
-              <div class="category-icon">
-                <img
-                  src="/images/business-and-trade.svg"
-                  alt=""
-                  class="w-100"
-                />
-              </div>
-              <p class="category-text">Arsitektur</p>
-            </a>
-          </div>
+            <div 
+              class="col-12 text-center py-5" 
+              data-aos="fade-up"
+              data-aos-delay="100">
+              Tidak ada Kategori yang ditemukan
+            </div>
+            @endforelse
+          
         </div>
       </div>
     </section>
@@ -108,222 +56,44 @@
         </div>
 
         <div class="row no-gutters">
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/AbonEbiKriuk.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">Abon Ebi Kriuk</div>
-              <div class="product-price">Rp 54.000</div>
-            </a>
-          </div>
+          @php $incrementProduct = 0; @endphp
+          @forelse ($products as $product)
+            <div
+              class="col-lg-2 col-md-3 col-4 p-1"
+              data-aos="fade-up"
+              data-aos-delay="{{ $incrementProduct += 100 }}">
+              <a href="{{ route('detail', $product->slug) }}" class="component-products d-block">
+                <div class="product-thumnail">
+                  <img
+                    src="
+                      @if ($product->galleries->count())
+                        {{ Storage::url($product->galleries->first()->photos) }}
+                      @else
+                        /images/bgHexEEE.png
+                      @endif
+                    "
+                    alt=""
+                    class="product-image"
+                  />
+                </div>
+                <div class="product-text text-justify">{{ $product->name }}</div>
+                <div class="product-price">Rp {{ $product->price }}</div>
+              </a>
+            </div>
+              
+          @empty
+            <div 
+              class="col-12 text-center py-5" 
+              data-aos="fade-up"
+              data-aos-delay="100">
+              Tidak ada Produk yang ditemukan
+            </div>
+          @endforelse
+        </div>
 
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/AdidasSepatuBasket.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Adidas Sepatu Basket
-              </div>
-              <div class="product-price">Rp 300.000</div>
-            </a>
-          </div>
-
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img src="/images/DayCream.jpg" alt="" class="product-image" />
-              </div>
-              <div class="product-text text-justify">Day Cream</div>
-              <div class="product-price">Rp 55.000</div>
-            </a>
-          </div>
-
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <a href="#" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/1SetAlatKosmetik.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Satu Set Alat Kosmetik dan Aksesoris
-              </div>
-              <div class="product-price">Rp 350.000</div>
-            </a>
-          </div>
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/KacaMataAntiRadiasi.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Kecamata Anti Radiasi Matahari
-              </div>
-              <div class="product-price">Rp 50.000</div>
-            </a>
-          </div>
-
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            <a href="#" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/MinumanSehatMagicMidn.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Minuman Sehat Magic Midn Rasa Matcha
-              </div>
-              <div class="product-price">Rp 200.000</div>
-            </a>
-          </div>
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="700"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img src="/images/CocaCola.jpg" alt="" class="product-image" />
-              </div>
-              <div class="product-text text-justify">Coca Cola Original</div>
-              <div class="product-price">Rp 12.000</div>
-            </a>
-          </div>
-
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="800"
-          >
-            <a href="#" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/ParfumMyramK.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">MyriamK Parfum</div>
-              <div class="product-price">Rp 250.000</div>
-            </a>
-          </div>
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="900"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/HipeasSnack.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">Hippeas Snack</div>
-              <div class="product-price">Rp 20.000</div>
-            </a>
-          </div>
-
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="1000"
-          >
-            <a href="#" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/QuokkaBotolKopi.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Quokka Botol Minum Kopi
-              </div>
-              <div class="product-price">Rp 300.000</div>
-            </a>
-          </div>
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="1100"
-          >
-            <a href="details.html" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/SepatuHeelCorakBunga.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Sepatu Heel Corak Bunga
-              </div>
-              <div class="product-price">Rp 500.000</div>
-            </a>
-          </div>
-
-          <div
-            class="col-lg-2 col-md-3 col-4 p-1"
-            data-aos="fade-up"
-            data-aos-delay="1200"
-          >
-            <a href="#" class="component-products d-block">
-              <div class="product-thumnail">
-                <img
-                  src="/images/TasSelempangLeisara.jpg"
-                  alt=""
-                  class="product-image"
-                />
-              </div>
-              <div class="product-text text-justify">
-                Tas Selempang Leisara
-              </div>
-              <div class="product-price">Rp 550.000</div>
-            </a>
+        <div class="row">
+          <div class="col-12 mt-4 d-flex justify-content-center">
+            {{ $products->links('vendor.pagination.custom') }}
           </div>
         </div>
       </div>
@@ -332,4 +102,13 @@
 
   </div>
 @endsection
+
+@push('addon-style')
+  <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+@endpush
 

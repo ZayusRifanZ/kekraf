@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Category;
+use App\Product;
 class CategoryController extends Controller
 {
     /**
@@ -13,7 +15,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('pages.category');
+        $categories = Category::all();
+        $products = Product::with('galleries')->paginate(12);
+        return view('pages.category', [
+            'categories' => $categories,
+            'products' => $products
+        ]);
     }
 
 }
