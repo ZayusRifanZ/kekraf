@@ -64,6 +64,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'name.required' => 'Nama panjang tidak boleh kosong',
+            'email.required' => 'Alamat email tidak boleh kosong',
+            'email.email' => 'Alamat email anda tidak sesuai dengan format',
+            'email.unique' => 'Alamat email yang anda gunakan sudah terpakai',
+            'password.required' => 'Password tidak boleh kosong',
+            'password.min' => 'Password anda tidak boleh kurang dari 8 karakter',
+            'password.confirmed' => 'Konfirmasi Password anda tidak sesuai atau tidak sama',
+        ];
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -71,7 +80,7 @@ class RegisterController extends Controller
             'store_name' => ['nullable', 'string', 'max:255'],
             'categories_id' => ['nullable', 'integer', 'exists:categories,id'],
             'is_store_open' => ['required']
-        ]);
+        ], $messages);
     }
 
     /**

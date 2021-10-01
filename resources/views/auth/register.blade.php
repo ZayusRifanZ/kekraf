@@ -24,7 +24,6 @@
                     class="form-control @error('name') is-invalid @enderror" 
                     name="name" 
                     value="{{ old('name') }}" 
-                    required 
                     autocomplete="name" 
                     autofocus
                   >
@@ -46,7 +45,6 @@
                     :class="{ 'is-invalid': this.email_unavailable }"
                     name="email" 
                     value="{{ old('email') }}"
-                    required 
                     autocomplete="email">
                   @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -75,16 +73,10 @@
                   <input 
                     id="password-confirm" 
                     type="password" 
-                    {{-- class="form-control @error('password_confirmation') is-invalid @enderror"  --}}
                     class="form-control"
                     name="password_confirmation" 
                     required 
                     autocomplete="new-password">
-                  {{-- @error('password_confirmation')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror --}}
                 </div>
                 <div class="form-group">
                   <label for="">Toko</label>
@@ -187,7 +179,6 @@
       },
       methods: {
         checkForEmailAvailability: function () {
-          console.log('tes aja coba');
           var self = this;
           axios.get('{{ route('api-register-check') }}', {
             params: {
@@ -201,7 +192,7 @@
                 {
                   position: "top-center",
                   className: "rounded",
-                  duration: 1000,
+                  duration: 2000,
                 }
               );
               self.email_unavailable = false;
@@ -211,7 +202,7 @@
                 {
                   position: "top-center",
                   className: "rounded",
-                  duration: 1000,
+                  duration: 2000,
                 }
               );
               self.email_unavailable = true;
