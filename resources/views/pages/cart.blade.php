@@ -24,6 +24,17 @@
               </ol>
             </nav>
           </div>
+
+          <div class="col-12">
+            @if(session()->has('message'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            @endif
+          </div>
         </div>
       </div>
     </section>
@@ -44,27 +55,41 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style="width: 20%">
-                    <img
-                      src="/images/pencil-1.jpg"
-                      alt=""
-                      class="cart-image"
-                    />
-                  </td>
-                  <td style="width: 35%">
-                    <div class="product-title">Pencil</div>
-                    <div class="product-subtitle">Toko Naura_store</div>
-                  </td>
-                  <td style="width: 35%">
-                    <div class="product-title">Rp 20.000</div>
-                    <div class="product-subtitle">IDR</div>
-                  </td>
-                  <td style="width: 20%">
-                    <a href="#" class="btn btn-romove-cart">Hapus </a>
-                  </td>
-                </tr>
-                <tr>
+                @foreach ($carts as $cart)
+                
+                  <tr>
+                    <td style="width: 20%">
+                      @if ($cart->product->galleries)
+                        <img
+                          src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
+                          alt=""
+                          class="cart-image"
+                        />
+                      @else
+                        <img src="/images/bgHexEEE.png" alt="" class="cart-image">
+                      @endif
+                    </td>
+                    <td style="width: 35%">
+                      <div class="product-title">{{ $cart->product->name }}</div>
+                      <div class="product-subtitle">Toko {{ $cart->user->store_name }}</div>
+                    </td>
+                    <td style="width: 35%">
+                      <div class="product-title">Rp {{ number_format($cart->product->price) }}</div>
+                      <div class="product-subtitle">IDR</div>
+                    </td>
+                    <td style="width: 20%">
+                      <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-romove-cart">
+                          Hapus 
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                @endforeach
+
+                {{-- <tr>
                   <td style="width: 20%">
                     <img
                       src="/images/CocaCola.jpg"
@@ -103,7 +128,7 @@
                   <td style="width: 20%">
                     <a href="#" class="btn btn-romove-cart">Hapus </a>
                   </td>
-                </tr>
+                </tr> --}}
               </tbody>
             </table>
           </div>
