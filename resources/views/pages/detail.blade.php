@@ -24,6 +24,18 @@
               </ol>
             </nav>
           </div>
+
+          <div class="col-12">
+            @if(session()->has('message'))
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+            @endif
+          </div>
+          
         </div>
       </div>
     </section>
@@ -68,38 +80,35 @@
           </div>
 
           <div class="col-lg-6" data-aos="fade-up">
-            <div class="product">Pensil tulis dan warna warni</div>
-            <a href="#" class="store d-block">Kunjungi Toko Naura_store</a>
+            <div class="product">{{ $product->name }}</div>
+            <a href="#" class="store d-block">Kunjungi Toko {{ $product->user->store_name }}</a>
 
             <div class="pricing">
-              <span class="price">Rp 20.000,00</span>
+              <span class="price">Rp {{ number_format($product->price) }}</span>
               <span class="sum-buying">Terjual 18,2rb</span>
             </div>
 
             <div class="description text-justify">
-              <p>
-                12 Pcs pensil, diasah, pensil HB #2 yang terbuat dari kayu
-                berkualitas tinggi untuk penajaman yang bersih dan mudah.
-              </p>
-              <p>
-                Penghapus lembut, bebas noda, bebas lateks yang diamankan di
-                ujungnya untuk menghapus kesalahan dengan mudah.
-              </p>
-              <p>
-                JAMINAN PENGEMBALIAN PRODUSEN: Kami melakukan yang terbaik
-                untuk menawarkan produk yang lebih baik. Jika Anda tidak puas
-                dengan produk kami karena alasan apa pun, silakan hubungi
-                kami, kami akan dengan senang hati mengganti unit Anda atau
-                menawarkan pengembalian dana penuh!
-              </p>
+              {!! $product->description !!}
             </div>
-
-            <a
-              href="{{ route('cart') }}"
-              class="btn btn-custom-primary px-4 text-white d-block mb-3"
-            >
-              Tambah ke keranjang
-            </a>
+            @auth
+              <form action="{{ route('detail-add', $product->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <button
+                  type="submit"
+                  class="btn btn-custom-primary px-4 text-white btn-block mb-3"
+                >
+                  Tambah ke keranjang
+                </button>
+              </form>
+            @else
+              <a
+                href="{{ route('login') }}"
+                class="btn btn-custom-primary px-4 text-white d-block mb-3"
+              >
+                Masuk untuk menambahkan
+              </a>
+            @endauth
           </div>
         </div>
       </div>
@@ -177,22 +186,12 @@
       data: {
         activePhoto: 0,
         photos: [
-          {
-            id: 1,
-            url: "/images/pencil-1.jpg",
-          },
-          {
-            id: 2,
-            url: "/images/pencil-2.jpg",
-          },
-          {
-            id: 3,
-            url: "/images/pencil-3.jpg",
-          },
-          {
-            id: 4,
-            url: "/images/pencil-4.jpg",
-          },
+          @foreach ($product->galleries as $gallery)
+            {
+              id: {{ $gallery->id }},
+              url: "{{ Storage::url($gallery->photos) }}",
+            },
+          @endforeach
         ],
       },
       methods: {
