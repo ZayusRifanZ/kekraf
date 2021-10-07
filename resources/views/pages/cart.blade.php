@@ -55,8 +55,9 @@
                 </tr>
               </thead>
               <tbody>
+                @php $total_price = 0; @endphp
+
                 @foreach ($carts as $cart)
-                
                   <tr>
                     <td style="width: 20%">
                       @if ($cart->product->galleries)
@@ -87,6 +88,9 @@
                       </form>
                     </td>
                   </tr>
+
+                  @php $total_price += $cart->product->price; @endphp
+
                 @endforeach
 
                 {{-- <tr>
@@ -141,117 +145,127 @@
             <h2 class="mb-4">Rincian Pengiriman</h2>
           </div>
         </div>
-        <div class="row mb-2" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="addressOne">Alamat 1</label>
-              <input
-                type="text"
-                class="form-control"
-                id="addressOne"
-                name="addressOne"
-                value="Setra Duta Cemara"
-              />
+        <form action="" id="locations">
+          <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" >
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="address_one">Alamat 1</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address_one"
+                  name="address_one"
+                  value="Setra Duta Cemara"
+                />
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="addressTwo">Alamat 2</label>
-              <input
-                type="text"
-                class="form-control"
-                id="addressTwo"
-                name="addressTwo"
-                value="Blok B2 No. 34"
-              />
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="address_two">Alamat 2</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address_two"
+                  name="address_two"
+                  value="Blok B2 No. 34"
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="province">Provinsi</label>
-              <select name="province" id="province" class="form-control">
-                <option value="West Java">West Java</option>
-              </select>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="provinces_id">Provinsi</label>
+                <select name="provinces_id" id="provinces_id" class="form-control" v-if="provinces" v-model="provinces_id">
+                  <option v-for="province in provinces" :value="province.id">@{{ province.name }}</option>
+                </select>
+                <select v-else class="form-control" ></select>
+              </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="city">Kota</label>
-              <select name="city" id="city" class="form-control">
-                <option value="Bandung">Bandung</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="postalCode">Kode Pos</label>
-              <input
-                type="text"
-                class="form-control"
-                id="postalCode"
-                name="postalCode"
-                value="123999"
-              />
-            </div>
-          </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="regencies_id">Kota</label>
+                {{-- <select name="regencies_id" id="regencies_id" class="form-control">
+                  <option value="Bandung">Tanjung Pinang</option>
+                </select> --}}
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="country">Negara</label>
-              <input
-                type="text"
-                class="form-control"
-                id="country"
-                name="country"
-                value="Indonesia"
-              />
+                <select name="regencies_id" id="regencies_id" class="form-control" v-if="provinces" v-model="regencies_id">
+                  <option v-for="regency in regencies" :value="regency.id">@{{ regency.name }}</option>
+                </select>
+                <select v-else class="form-control" ></select>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="zip_code">Kode Pos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="zip_code"
+                  name="zip_code"
+                  value="123999"
+                />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="country">Negara</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="country"
+                  name="country"
+                  value="Indonesia"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="phone_number">No Hp</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone_number"
+                  name="phone_number"
+                  value="+628 2020 11111"
+                />
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="mobile">No Hp</label>
-              <input
-                type="text"
-                class="form-control"
-                id="mobile"
-                name="mobile"
-                value="+628 2020 11111"
-              />
+          <div class="row" data-aos="fade-up" data-aos-delay="150">
+            <div class="col-12">
+              <hr />
+            </div>
+            <div class="col-12">
+              <h2 class="mb-2">Informasi Pembayaran</h2>
             </div>
           </div>
-        </div>
-        <div class="row" data-aos="fade-up" data-aos-delay="150">
-          <div class="col-12">
-            <hr />
+          <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-6 col-md-2">
+              <div class="product-title">Rp 0</div>
+              <div class="product-subtitle">Pajak</div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="product-title">Rp 0</div>
+              <div class="product-subtitle">Asuransi Produk</div>
+            </div>
+            <div class="col-6 col-md-2">
+              <div class="product-title">Rp 0</div>
+              <div class="product-subtitle">Kirim ke Jakarta</div>
+            </div>
+            <div class="col-6 col-md-2">
+              <div class="product-title text-success">Rp {{ number_format($total_price ?? 0) }}</div>
+              <div class="product-subtitle">Total</div>
+            </div>
+            <div class="col-12 col-md-3 mt-2">
+              <a href="{{ route('success') }}" class="btn btn-success btn-block"
+                >Pesan Sekarang</a
+              >
+            </div>
           </div>
-          <div class="col-12">
-            <h2 class="mb-2">Informasi Pembayaran</h2>
-          </div>
-        </div>
-        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-6 col-md-2">
-            <div class="product-title">Rp 10</div>
-            <div class="product-subtitle">Pajak</div>
-          </div>
-          <div class="col-6 col-md-3">
-            <div class="product-title">Rp 2.800</div>
-            <div class="product-subtitle">Asuransi Produk</div>
-          </div>
-          <div class="col-6 col-md-2">
-            <div class="product-title">Rp 36.000</div>
-            <div class="product-subtitle">Kirim ke Jakarta</div>
-          </div>
-          <div class="col-6 col-md-2">
-            <div class="product-title text-success">Rp 370.810</div>
-            <div class="product-subtitle">Total</div>
-          </div>
-          <div class="col-12 col-md-3 mt-2">
-            <a href="{{ route('success') }}" class="btn btn-success btn-block"
-              >Pesan Sekarang</a
-            >
-          </div>
-        </div>
+        </form>
+        
       </div>
     </section>
     <!-- tutup cart -->
@@ -260,3 +274,47 @@
   </div>
 @endsection
 
+@push('addon-script')
+  <script src="/vendor/vue/vue.js"></script>
+  <script src="/vendor/vue/vue-toasted.min.js"></script>
+  <script src="/vendor/axios/axios.min.js"></script>
+  <script>
+    var locations = new Vue({
+      el: "#locations",
+      mounted() {
+        AOS.init();
+        this.getProvincesData();
+      },
+      data: {
+        provinces: null,
+        regencies: null,
+        provinces_id: null,
+        regencies_id: null,
+
+      },
+      methods: {
+        getProvincesData() {
+          var self = this;
+          axios.get('{{ route('api-provinces') }}')
+          .then(function(response){
+            self.provinces = response.data;
+          })
+        },
+        getRegenciesData() {
+          var self = this;
+          axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+          .then(function(response){
+            self.regencies = response.data;
+          })
+        }
+      },
+
+      watch: {
+        provinces_id: function(val, oldVal){
+          this.regencies_id = null;
+          this.getRegenciesData();
+        }
+      }
+    });
+  </script>
+@endpush
