@@ -54,9 +54,17 @@
           <input type="text" name="search" placeholder="Search.."/>
         </form>
           <li class="nav-item">
-            <a href="#" class="nav-link d-inline-block mt-2">
-              <img src="/images/cart icon.svg" alt="" />
-              <div class="card-badge">3</div>
+            <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
+              @php
+                  $cart = \App\Cart::where('users_id', Auth::user()->id)->count();
+              @endphp
+              @if ($cart > 0)
+                <img src="/images/cart icon.svg" alt="" />
+                <div class="card-badge">{{ $cart }}</div>
+              @else
+                <img src="/images/cart icon.svg" alt="" />
+              @endif
+              
             </a>
           </li>
           <li class="nav-item dropdown">
