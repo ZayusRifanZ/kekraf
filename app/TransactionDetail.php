@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class TransactionDetail extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,8 @@ class Transaction extends Model
      * @var array
      */
     protected $fillable = [
-        'users_id', 'insurace_price', 'shipping_price', 'total_price', 'transactions_status', 'code'
+        'transactions_id', 'products_id', 'price', 'shipping_status', 'resi', 'code',
+        
     ];
 
     /**
@@ -23,8 +24,4 @@ class Transaction extends Model
     protected $hidden = [
         
     ];
-
-    public function user(){
-        return  $this->belongsTo(User::class, 'users_id', 'id' );
-    }
 }
