@@ -22,10 +22,10 @@
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item ">
+        <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('home') }}"> Beranda </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {{ request()->is('categories*') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('categories') }}"> Kategori </a>
         </li>
         <li class="nav-item">
