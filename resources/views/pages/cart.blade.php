@@ -145,7 +145,9 @@
             <h2 class="mb-4">Rincian Pengiriman</h2>
           </div>
         </div>
-        <form action="" id="locations">
+        <form action="{{ route('checkout') }}" id="locations" enctype="multipart/form-data" method="POST">
+          @csrf
+          <input type="hidden" name="total_price" value="{{ $total_price }}">
           <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" >
             <div class="col-md-6">
               <div class="form-group">
@@ -184,10 +186,6 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label for="regencies_id">Kota</label>
-                {{-- <select name="regencies_id" id="regencies_id" class="form-control">
-                  <option value="Bandung">Tanjung Pinang</option>
-                </select> --}}
-
                 <select name="regencies_id" id="regencies_id" class="form-control" v-if="provinces" v-model="regencies_id">
                   <option v-for="regency in regencies" :value="regency.id">@{{ regency.name }}</option>
                 </select>
@@ -259,9 +257,12 @@
               <div class="product-subtitle">Total</div>
             </div>
             <div class="col-12 col-md-3 mt-2">
-              <a href="{{ route('success') }}" class="btn btn-success btn-block"
-                >Pesan Sekarang</a
+              <button 
+                type="submit"
+                class="btn btn-success btn-block"
               >
+                Pesan Sekarang
+              </button>
             </div>
           </div>
         </form>
