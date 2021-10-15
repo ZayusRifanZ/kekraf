@@ -16,43 +16,62 @@
         <div class="dashboard-content">
           <div class="row">
             <div class="col-12">
-              <form action="">
+              <form 
+                action="{{ route('dashboard-product-store') }}"   
+                method="POST" 
+                enctype="multipart/form-data"
+              >
+                @csrf
+                <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="">Nama Produk</label>
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" name="name" />
+                          @error('name')
+                            <small class="text-danger">{{ $message }}</small>
+                          @enderror
                         </div>
                       </div>
 
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="">Harga</label>
-                          <input type="text" class="form-control" />
+                          <input type="number" class="form-control" name="price"/>
+                          @error('price')
+                            <small class="text-danger">{{ $message }}</small>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label>Kategori</label>
-                          <select name="category" class="form-control">
-                            <option value="" disabled>
-                              Pilih Kategori
-                            </option>
+                          <select name="categories_id" class="form-control">
+                            <option value="" disabled selected>Pilih Kategori</option>
+                            @foreach ($categories as $category)
+                              <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                           </select>
+                          @error('categories_id')
+                            <small class="text-danger">{{ $message }}</small>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label>Deskripsi</label>
-                          <textarea name="editor"></textarea>
+                          <textarea name="description" id="editor"></textarea>
+                          @error('description')
+                            <small class="text-danger">{{ $message }}</small>
+                          @enderror
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label>Thumnail</label>
-                          <input type="file" class="form-control" />
+                          <input type="file" name="photo[]" class="form-control" multiple/>
                           <p class="text-muted">
                             Kamu dapat memilih lebih dari satu file
                           </p>

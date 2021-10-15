@@ -15,6 +15,16 @@
       <div class="section-body">
         <div class="dashboard-content">
           <div class="row mt-4">
+            <div class="col-md-12">
+               @if(session()->has('message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session()->get('message') }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              @endif
+            </div>
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
               <a
                 href="{{ route('dashboard-product-create') }}"
@@ -26,70 +36,25 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="{{ url('/dashboard/products/1') }}"
-                class="card card-dashboard-product d-block"
-              >
-                <div class="card-body">
-                  <img
-                    src="/images/pencil-3.jpg"
-                    alt="img-card-1"
-                    class="w-100 mb-2 img-card-custom"
-                  />
-                  <div class="product-title">Pensil Mewarnai</div>
-                  <div class="product-category">alat tulis</div>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="{{ url("/dashboard/products/1") }}"
-                class="card card-dashboard-product d-block"
-              >
-                <div class="card-body">
-                  <img
-                    src="/images/CocaCola.jpg"
-                    alt="img-card-1"
-                    class="w-100 mb-2 img-card-custom"
-                  />
-                  <div class="product-title">CocaCola</div>
-                  <div class="product-category">minuman</div>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="{{ url("/dashboard/products/1") }}"
-                class="card card-dashboard-product d-block"
-              >
-                <div class="card-body">
-                  <img
-                    src="/images/DayCream.jpg"
-                    alt="img-card-1"
-                    class="w-100 mb-2 img-card-custom"
-                  />
-                  <div class="product-title">Day Cream</div>
-                  <div class="product-category">kosmetik</div>
-                </div>
-              </a>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="{{ url("/dashboard/products/1") }}"
-                class="card card-dashboard-product d-block"
-              >
-                <div class="card-body">
-                  <img
-                    src="/images/AdidasSepatuBasket.jpg"
-                    alt="img-card-1"
-                    class="w-100 mb-2 img-card-custom"
-                  />
-                  <div class="product-title">Adidas Sepatu Basket</div>
-                  <div class="product-category">sepatu</div>
-                </div>
-              </a>
-            </div>
+            @foreach ($products as $product)
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <a
+                  href="{{ route('dashboard-product-detail', $product->id) }}"
+                  class="card card-dashboard-product d-block"
+                >
+                  <div class="card-body">
+                    <img
+                      src="{{ Storage::url($product->galleries->first()->photos ?? '') }}"
+                      alt="img-card-1"
+                      class="w-100 mb-2 img-card-custom"
+                    />
+                    <div class="product-title">{{ $product->name }}</div>
+                    <div class="product-category">{{ $product->category->name }}</div>
+                  </div>
+                </a>
+              </div>
+            @endforeach
+            
           </div>
         </div>
       </div>
