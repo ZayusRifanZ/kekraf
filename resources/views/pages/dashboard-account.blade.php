@@ -16,7 +16,21 @@
         <div class="dashboard-content">
           <div class="row">
             <div class="col-12">
-              <form action="" class="card">
+              @if(session()->has('message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session()->get('message') }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              @endif
+              <form 
+                action="{{ route('dashboard-setting-redirect', 'dashboard-setting-account') }}" 
+                method="POST"
+                enctype="multipart/form-data"
+                id="locations"
+                class="card">
+                @csrf
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-3">
@@ -43,88 +57,119 @@
                         <label for="">Nama</label>
                         <input
                           type="text"
+                          name="name"
                           class="form-control"
-                          value="Ujang Maman"
+                          value="{{ $user->name }}"
                         />
                       </div>
                       <div class="form-group">
                         <label for="">Email</label>
                         <input
                           type="email"
+                          name="email"
                           class="form-control"
-                          value="ujangmaman@mail.com"
+                          value="{{ $user->email }}"
                         />
                       </div>
                       <div class="form-group">
-                        <label for="">No. Telepon</label>
+                        <label for="phone_number">No. Telepon</label>
                         <input
                           type="text"
+                          id="phone_number"
+                          name="phone_number"
                           class="form-control"
-                          value="+62 877 6727 8922"
+                          value="{{ $user->phone_number }}"
                         />
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="">Alamat 1</label>
+                        <label for="address_one">Alamat 1</label>
                         <input
                           type="text"
+                          id="address_one"
+                          name="address_one"
                           class="form-control"
-                          value="Papa La Casta"
+                          value="{{ $user->address_one }}"
                         />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="">Alamat 2</label>
+                        <label for="address_two">Alamat 2</label>
                         <input
                           type="text"
+                          id="address_two"
+                          name="address_two"
                           class="form-control"
-                          value="Blok B2 No. 34"
+                          value="{{ $user->address_two }}"
                         />
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="">Provinsi</label>
-                        <select name="" id="" class="form-control">
-                          <option value="" disabled>
-                            Pilih Provinsi
+                        <label for="provinces_id">Provinsi</label>
+                        <select 
+                          name="provinces_id" 
+                          id="provinces_id" 
+                          class="form-control" 
+                          v-if="provinces" 
+                          v-model="provinces_id"
+                        >
+                          <option 
+                            v-for="province in provinces" 
+                            :value="province.id"
+                          >
+                            @{{ province.name }}
                           </option>
-                          <option value="">Kepulauan Riau</option>
                         </select>
+                        <select v-else class="form-control" ></select>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="">Kota</label>
-                        <select name="" id="" class="form-control">
-                          <option value="" disabled>Pilih Kota</option>
-                          <option value="">Tanjungpinang</option>
+                        <label for="regencies_id">Kota</label>
+                        <select 
+                          name="regencies_id" 
+                          id="regencies_id" 
+                          class="form-control" 
+                          v-if="provinces" 
+                          v-model="regencies_id"
+                        >
+                          <option 
+                            v-for="regency in regencies" 
+                            :value="regency.id"
+                          >
+                            @{{ regency.name }}
+                          </option>
                         </select>
+                        <select v-else class="form-control" ></select>
+
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="">Kode Pos</label>
+                        <label for="zip_code">Kode Pos</label>
                         <input
                           type="number"
+                          id="zip_code"
+                          name="zip_code"
                           class="form-control"
-                          value="21483"
+                          value="{{ $user->zip_code }}"
                         />
                       </div>
                     </div>
 
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="">Negara</label>
+                        <label for="country">Negara</label>
                         <input
                           type="text"
-                          name=""
-                          id=""
-                          value="Indonesia"
+                          name="country"
+                          id="country"
                           class="form-control"
+                          value="{{ $user->country }}"
                         />
                       </div>
                     </div>
@@ -146,3 +191,47 @@
   </div>
 @endsection
 
+@push('addon-script')
+  <script src="/vendor/vue/vue.js"></script>
+  <script src="/vendor/vue/vue-toasted.min.js"></script>
+  <script src="/vendor/axios/axios.min.js"></script>
+  <script>
+    var locations = new Vue({
+      el: "#locations",
+      mounted() {
+        AOS.init();
+        this.getProvincesData();
+      },
+      data: {
+        provinces: null,
+        regencies: null,
+        provinces_id: null,
+        regencies_id: null,
+
+      },
+      methods: {
+        getProvincesData() {
+          var self = this;
+          axios.get('{{ route('api-provinces') }}')
+          .then(function(response){
+            self.provinces = response.data;
+          })
+        },
+        getRegenciesData() {
+          var self = this;
+          axios.get('{{ url('api/regencies') }}/' + self.provinces_id)
+          .then(function(response){
+            self.regencies = response.data;
+          })
+        }
+      },
+
+      watch: {
+        provinces_id: function(val, oldVal){
+          this.regencies_id = null;
+          this.getRegenciesData();
+        }
+      }
+    });
+  </script>
+@endpush

@@ -16,7 +16,21 @@
         <div class="dashboard-content">
           <div class="row">
             <div class="col-12">
-              <form action="" class="card">
+              @if(session()->has('message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ session()->get('message') }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+              @endif
+              <form 
+                action="{{ route('dashboard-setting-redirect', 'dashboard-setting-store') }}" 
+                method="POST"
+                enctype="multipart/form-data"
+                class="card"
+              >
+                @csrf
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6">
@@ -24,21 +38,38 @@
                         <label for="">Nama Toko</label>
                         <input
                           type="text"
-                          name=""
-                          id=""
+                          name="store_name"
                           class="form-control"
+                          value="{{ $user->store_name }}"
                         />
+                        @error('store_name')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="">Kategori</label>
-                        <select name="" id="" class="form-control">
-                          <option value="" disabled>
-                            Pilih Kategori
-                          </option>
-                          <option value="">satu</option>
+                        <label for="categories_id">Kategori</label>
+                        <select name="categories_id" class="form-control">
+                          @if ($user->categories_id == NULL)
+                            <option disabled>Pilih Kategori Toko..</option>
+                          @else
+                            @foreach ($categories as $category)
+                                @if ($user->categories_id == $category->id)
+                                  <option value="{{ $user->categories_id }}" selected>{{ $category->name }}</option>
+                                @endif
+                            @endforeach
+                          @endif
+                          {{-- <option value="{{ $user->categories_id }}" selected>{{ $user->category->name }}</option> --}}
+                          @foreach ($categories as $category)
+                          @if ($user->categories_id !== $category->id )
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                          @endif
+                          @endforeach
                         </select>
+                        @error('categories_id')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -56,10 +87,11 @@
                         >
                           <input
                             type="radio"
-                            name="is_store_open"
+                            name="store_status"
                             id="openStoreTrue"
                             class="custom-control-input"
-                            value="true"
+                            value="1"
+                            {{ $user->store_status == 1 ? 'checked' : '' }}
                           />
                           <label
                             for="openStoreTrue"
@@ -77,10 +109,12 @@
                         >
                           <input
                             type="radio"
-                            name="is_store_open"
+                            name="store_status"
                             id="openStoreFalse"
                             class="custom-control-input"
-                            value="false"
+                            value="0"
+
+                            {{ $user->store_status == 0 || $user->store_status == NULL ? 'checked' : '' }}
                           />
                           <label
                             for="openStoreFalse"

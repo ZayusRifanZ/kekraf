@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth']], function(){
         ->name('dashboard-transaction');
     Route::get('/dashboard/transaction/{id}', 'DashboardTransactionController@details')
         ->name('dashboard-transaction-detail');
+    Route::post('/dashboard/transaction/{id}', 'DashboardTransactionController@update')
+        ->name('dashboard-transaction-update');
 
     Route::get('/dashboard/setting', 'DashboardSettingController@store')
         ->name('dashboard-setting-store');
