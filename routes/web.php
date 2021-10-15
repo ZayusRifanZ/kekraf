@@ -32,21 +32,43 @@ Route::get('/register/success', 'Auth\RegisterController@success')->name('regist
 
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/cart', 'CartController@index')->name('cart');
-    Route::delete('/cart/{id}', 'CartController@delete')->name('cart-delete');
-    Route::post('/checkout', 'CheckoutController@process')->name('checkout');
+    Route::get('/cart', 'CartController@index')
+        ->name('cart');
+    Route::delete('/cart/{id}', 'CartController@delete')
+        ->name('cart-delete');
+    Route::post('/checkout', 'CheckoutController@process')
+        ->name('checkout');
 
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/dashboard', 'DashboardController@index')
+        ->name('dashboard');
 
-    Route::get('/dashboard/products', 'DashboardProductController@index')->name('dashboard-product');
-    Route::get('/dashboard/products/create', 'DashboardProductController@create')->name('dashboard-product-create');
-    Route::get('/dashboard/products/{id}', 'DashboardProductController@details')->name('dashboard-product-detail');
+    Route::get('/dashboard/products', 'DashboardProductController@index')
+        ->name('dashboard-product');
+    Route::get('/dashboard/products/create', 'DashboardProductController@create')
+        ->name('dashboard-product-create');
+    Route::post('/dashboard/products', 'DashboardProductController@store')
+        ->name('dashboard-product-store');
+    Route::get('/dashboard/products/{id}', 'DashboardProductController@details')
+        ->name('dashboard-product-detail');
+    Route::post('/dashboard/products/{id}', 'DashboardProductController@update')
+        ->name('dashboard-product-update');
 
-    Route::get('/dashboard/transaction', 'DashboardTransactionController@index')->name('dashboard-transaction');
-    Route::get('/dashboard/transaction/{id}', 'DashboardTransactionController@details')->name('dashboard-transaction-detail');
+    Route::post('/dashboard/products/gallery/upload', 'DashboardProductController@uploadGallery')
+        ->name('dashboard-product-gallery-upload');
+    Route::get('/dashboard/products/gallery/delete/{id}', 'DashboardProductController@deleteGallery')
+        ->name('dashboard-product-gallery-delete');
 
-    Route::get('/dashboard/setting', 'DashboardSettingController@store')->name('dashboard-setting-store');
-    Route::get('/dashboard/account', 'DashboardSettingController@account')->name('dashboard-setting-account');
+    Route::get('/dashboard/transaction', 'DashboardTransactionController@index')
+        ->name('dashboard-transaction');
+    Route::get('/dashboard/transaction/{id}', 'DashboardTransactionController@details')
+        ->name('dashboard-transaction-detail');
+
+    Route::get('/dashboard/setting', 'DashboardSettingController@store')
+        ->name('dashboard-setting-store');
+    Route::get('/dashboard/account', 'DashboardSettingController@account')
+        ->name('dashboard-setting-account');
+    Route::post('/dashboard/account/{redirect}', 'DashboardSettingController@update')
+        ->name('dashboard-setting-redirect');
 });
 
 
