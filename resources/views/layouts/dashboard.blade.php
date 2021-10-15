@@ -30,7 +30,7 @@
       <link rel="stylesheet" href="/style/stisla/scss/components.css" />
 
       <!-- aos -->
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+      <link href="/vendor/aos@2.3.1/aos.css" rel="stylesheet" />
     @stack('addon-style')
   </head>
 
@@ -46,30 +46,8 @@
                   ><i class="fas fa-bars"></i
                 ></a>
               </li>
-              {{-- <li>
-                <a
-                  href="#"
-                  data-toggle="search"
-                  class="nav-link nav-link-lg d-sm-none"
-                  ><i class="fas fa-search"></i
-                ></a>
-              </li> --}}
             </ul>
 
-            <!-- search element -->
-            <!-- <div class="search-element">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                data-width="250"
-              />
-              <button class="btn" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-              <div class="search-backdrop"></div>
-            </div> -->
           </form>
           <ul class="navbar-nav navbar-right">
             <li class="dropdown dropdown-list-toggle">
@@ -153,21 +131,29 @@
                   class="rounded-circle mr-1"
                 />
                 <div class="d-sm-none d-lg-inline-block">
-                  Hi, Ujang Maman
+                  Hi, {{ Auth::user()->name }}
                 </div></a
               >
               <div class="dropdown-menu dropdown-menu-right">
-                <a href="dashboard.html" class="dropdown-item has-icon">
+                <a href="{{ route('dashboard') }}" class="dropdown-item has-icon">
                   <i class="fas fa-fire"></i> Dashboard
                 </a>
 
-                <a href="dashboard-setting.html" class="dropdown-item has-icon">
+                <a href="{{ route('dashboard-setting-account') }}" class="dropdown-item has-icon">
                   <i class="fas fa-cog"></i> Settings
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="index.html" class="dropdown-item has-icon text-danger">
-                  <i class="fas fa-sign-out-alt"></i> Logout
+                <a 
+                  class="dropdown-item has-icon text-danger" 
+                  href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                  <i class="fas fa-sign-out-alt"></i>
+                  Logout
                 </a>
+                {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form> --}}
               </div>
             </li>
           </ul>
@@ -175,41 +161,41 @@
         <div class="main-sidebar" data-aos="fade-right">
           <aside id="sidebar-wrapper">
             <div class="sidebar-brand">
-              <a href="index.html">
+              <a href="{{ route('home') }}">
                 <img src="/images/logo.svg" alt="" class="mt-3" />
               </a>
             </div>
             <div class="sidebar-brand sidebar-brand-sm">
-              <a href="index.html">KE</a>
+              <a href="{{ route('home') }}">KE</a>
             </div>
             <ul class="sidebar-menu mt-4">
-              <li class="nav-item ">
+              <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                   <i class="fas fa-fire"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item {{ (request()->is('dashboard/products*')) ? 'active' : '' }}">
                 <a href="{{ route('dashboard-product') }}" class="nav-link">
                   <i class="fas fa-chart-area"></i>
                   <span>Produk Saya</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item {{ (request()->is('dashboard/transaction*')) ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('dashboard-transaction') }}"
                   ><i class="fas fa-money-bill-wave"></i>
                   <span>Transaksi</span></a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item {{ (request()->is('dashboard/setting')) ? 'active' : '' }}">
                 <a href="{{ route('dashboard-setting-store') }}" class="nav-link">
                   <i class="fas fa-store"></i>
                   <span>Setting Toko</span>
                 </a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item {{ (request()->is('dashboard/account*')) ? 'active' : '' }}">
                 <a href="{{ route('dashboard-setting-account') }}" class="nav-link">
                   <i class="fas fa-user"></i>
                   <span>Akun Saya</span>
@@ -219,14 +205,21 @@
 
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
               <a
-                href="index.html"
-                class="btn btn-primary btn-lg btn-block btn-icon-split"
+                href="{{ route('logout') }}"
+                class="btn btn-outline-danger btn-lg btn-block btn-icon-split"
+                onclick="
+                  event.preventDefault();
+                  document.getElementById('logout-form').submit();"
               >
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
             </div>
           </aside>
         </div>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>        
 
         {{-- <!-- Main Content --> --}}
         @yield('content')
@@ -273,7 +266,7 @@
       <script src="/style/stisla/js/custom.js"></script>
 
       <!-- Page Specific JS File -->
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script src="/vendor/aos@2.3.1/aos.js"></script>
       <script>
         AOS.init();
       </script>

@@ -19,7 +19,7 @@
               <div class="card mb-2">
                 <div class="card-body">
                   <div class="dashboard-card-title">Pelanggan</div>
-                  <div class="dashboard-card-subtitle">{{ $customer }}</div>
+                  <div class="dashboard-card-subtitle">{{ number_format($customer) }}</div>
                 </div>
               </div>
             </div>
@@ -27,7 +27,7 @@
               <div class="card mb-2">
                 <div class="card-body">
                   <div class="dashboard-card-title">Pendapatan</div>
-                  <div class="dashboard-card-subtitle"> Rp {{ $revenue }}</div>
+                  <div class="dashboard-card-subtitle"> Rp {{ number_format($revenue) }}</div>
                 </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
               <div class="card mb-2">
                 <div class="card-body">
                   <div class="dashboard-card-title">Transaksi</div>
-                  <div class="dashboard-card-subtitle">{{ $transaction }}</div>
+                  <div class="dashboard-card-subtitle">{{ number_format($transaction) }}</div>
                 </div>
               </div>
             </div>

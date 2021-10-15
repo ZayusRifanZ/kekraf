@@ -30,7 +30,7 @@
       <link rel="stylesheet" href="/style/stisla/scss/components.css" />
 
       <!-- aos -->
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+      <link href="/vendor/aos@2.3.1/aos.css" rel="stylesheet" />
 
       {{-- datatable --}}
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/datatables.min.css"/>
@@ -70,8 +70,13 @@
                 </div></a
               >
               <div class="dropdown-menu dropdown-menu-right">
-                <a href="{{ route('home') }}" class="dropdown-item has-icon text-danger">
-                  <i class="fas fa-sign-out-alt"></i> Logout
+                <a 
+                  class="dropdown-item has-icon text-danger" 
+                  href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                  <i class="fas fa-sign-out-alt"></i>
+                  Logout
                 </a>
               </div>
             </li>
@@ -88,7 +93,7 @@
               <a href="index.html">KE</a>
             </div>
             <ul class="sidebar-menu mt-4">
-              <li class="nav-item ">
+              <li class="nav-item {{ (request()->is('admin')) ? 'active' : '' }}">
                 <a href="{{ route('dashboard-admin') }}" class="nav-link">
                   <i class="fas fa-fire"></i>
                   <span>Dashboard</span>
@@ -130,16 +135,22 @@
             </ul>
 
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a
-                href="{{ route('home') }}"
-                class="btn btn-outline-danger btn-lg btn-block btn-icon-split"
-              >
-                <i class="fas fa-sign-out-alt"></i> Logout
+              <a 
+                class="btn btn-outline-danger btn-lg btn-block btn-icon-split" 
+                href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
               </a>
             </div>
           </aside>
         </div>
 
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+        
         {{-- <!-- Main Content --> --}}
         @yield('content')
 
@@ -186,7 +197,7 @@
       <script src="/style/stisla/js/custom.js"></script>
 
       <!-- Page Specific JS File -->
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <script src="/vendor/aos@2.3.1/aos.js"></script>
       <script>
         AOS.init();
       </script>
