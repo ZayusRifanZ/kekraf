@@ -112,21 +112,26 @@
                 data-aos="fade-up"
                 data-aos-delay="{{ $incrementProduct += 100 }}">
                 <a href="{{ route('detail', $product->slug) }}" class="component-products d-block">
-                  <div class="product-thumnail">
-                    <img
-                      src="
-                        @if ($product->galleries->count())
-                          {{ Storage::url($product->galleries->first()->photos) }}
-                        @else
-                          /images/bgHexEEE.png
-                        @endif
-                      "
-                      alt=""
-                      class="product-image"
-                    />
+                  <div class="card">
+                    <div class="product-thumnail">
+                      <img
+                        src="
+                          @if ($product->galleries->count())
+                            {{ Storage::url($product->galleries->first()->photos) }}
+                          @else
+                            /images/bgHexEEE.png
+                          @endif
+                        "
+                        alt=""
+                        class="product-image"
+                      />
+                    </div>
+                    <div class="card-body" style="padding-top: 0px">
+
+                      <div class="product-text ">{{ $product->name }}</div>
+                      <div class="product-price">Rp {{ number_format($product->price) }}</div>
+                    </div>
                   </div>
-                  <div class="product-text text-justify">{{ $product->name }}</div>
-                  <div class="product-price">Rp {{ $product->price }}</div>
                 </a>
               </div>
                 

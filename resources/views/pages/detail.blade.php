@@ -85,7 +85,7 @@
 
             <div class="pricing">
               <span class="price">Rp {{ number_format($product->price) }}</span>
-              <span class="sum-buying">Terjual 18,2rb</span>
+              <span class="sum-buying">Terjual {{ number_format($total_sold) }}</span>
             </div>
 
             <div class="description text-justify">

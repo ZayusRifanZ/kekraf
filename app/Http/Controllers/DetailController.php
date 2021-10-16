@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Cart;
+use App\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 
 // use App\TransactionDetail;
@@ -23,8 +24,14 @@ class DetailController extends Controller
         //     ->where('shipping_status', 'SUCCESS');
 
         $product = Product::with(['galleries', 'user'])->where('slug', $id)->firstOrFail();
+        $total_sold = TransactionDetail::where([
+            ['products_id', $product->id],
+            ['shipping_status', 'SUCCESS']])->count();
+
+        // return dd($total_sold);
         return view('pages.detail', [
-            'product' => $product
+            'product' => $product, 
+            'total_sold' => $total_sold
         ]);
     }
 
