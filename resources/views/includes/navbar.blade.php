@@ -74,16 +74,27 @@
               id="navbarDropdown"
               role="button"
               data-toggle="dropdown"
+              style="
+                max-width: 230px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              "
             >
               <img
-                src="/images/icon-user.png"
+                src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}"
                 alt=""
                 class="rounded-circle mr-2 profile-picture"
+                style="width: 45px; max-height: 45px;"
               />
               Hi, {{ Auth::user()->name }}
             </a>
             <div class="dropdown-menu">
+              @if (Auth::user()->roles == 'ADMIN')
+              <a href="{{ route('dashboard-admin') }}" class="dropdown-item">Dashboard</a>
+              @else
               <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
+              @endif
               <a href="{{ route('dashboard-setting-account') }}" class="dropdown-item"
                 >Setting</a
               >
@@ -105,10 +116,14 @@
         <!-- Mobile menu -->
         <ul class="navbar-nav d-block d-lg-none">
           <li class="nav-item">
-            <a href="#" class="nav-link"> Hi, Zayus </a>
+            @if (Auth::user()->roles == 'ADMIN')
+            <a href="{{ route('dashboard-admin') }}" class="nav-link"> Hi, {{ Auth::user()->name }} </a>
+            @else
+            <a href="{{ route('dashboard') }}" class="nav-link"> Hi, {{ Auth::user()->name }} </a>
+            @endif
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link d-inline-block"> Cart </a>
+            <a href="{{ route('cart') }}" class="nav-link d-inline-block"> Cart </a>
           </li>
         </ul>
       @endauth

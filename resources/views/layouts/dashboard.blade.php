@@ -52,72 +52,21 @@
           <ul class="navbar-nav navbar-right">
             <li class="dropdown dropdown-list-toggle">
               <a
-                href="#"
-                data-toggle="dropdown"
-                class="nav-link notification-toggle nav-link-lg"
+                href="{{ route('cart') }}"
+                class="nav-link  nav-link-lg"
               >
-                <img src="/images/cart-icon-light.svg" alt="" />
-                <div class="card-badge"><span>3</span></div>
+                @php
+                  $cart = \App\Cart::where('users_id', Auth::user()->id)->count();
+                @endphp
+                @if ($cart > 0)
+                  <img src="/images/cart-icon-light.svg" alt="" />
+                  <div class="card-badge">{{ $cart }}</div>
+                @else
+                  <img src="/images/cart-icon-light.svg" alt="" />
+                @endif
+                
               </a>
-              <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                <div class="dropdown-header">
-                  Notifications
-                  <div class="float-right">
-                    <a href="#">Mark All As Read</a>
-                  </div>
-                </div>
-                <div class="dropdown-list-content dropdown-list-icons">
-                  <a href="#" class="dropdown-item dropdown-item-unread">
-                    <div class="dropdown-item-icon bg-primary text-white">
-                      <i class="fas fa-code"></i>
-                    </div>
-                    <div class="dropdown-item-desc">
-                      Template update is available now!
-                      <div class="time text-primary">2 Min Ago</div>
-                    </div>
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <div class="dropdown-item-icon bg-info text-white">
-                      <i class="far fa-user"></i>
-                    </div>
-                    <div class="dropdown-item-desc">
-                      <b>You</b> and <b>Dedik Sugiharto</b> are now friends
-                      <div class="time">10 Hours Ago</div>
-                    </div>
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <div class="dropdown-item-icon bg-success text-white">
-                      <i class="fas fa-check"></i>
-                    </div>
-                    <div class="dropdown-item-desc">
-                      <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to
-                      <b>Done</b>
-                      <div class="time">12 Hours Ago</div>
-                    </div>
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <div class="dropdown-item-icon bg-danger text-white">
-                      <i class="fas fa-exclamation-triangle"></i>
-                    </div>
-                    <div class="dropdown-item-desc">
-                      Low disk space. Let's clean it!
-                      <div class="time">17 Hours Ago</div>
-                    </div>
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    <div class="dropdown-item-icon bg-info text-white">
-                      <i class="fas fa-bell"></i>
-                    </div>
-                    <div class="dropdown-item-desc">
-                      Welcome to Stisla template!
-                      <div class="time">Yesterday</div>
-                    </div>
-                  </a>
-                </div>
-                <div class="dropdown-footer text-center">
-                  <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
-              </div>
+              
             </li>
             <li class="dropdown">
               <a
@@ -127,8 +76,9 @@
               >
                 <img
                   alt="image"
-                  src="/images/Profil.png"
+                  src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}"
                   class="rounded-circle mr-1"
+                  style="max-height: 30px;"
                 />
                 <div class="d-sm-none d-lg-inline-block">
                   Hi, {{ Auth::user()->name }}
@@ -228,9 +178,9 @@
           <div class="footer-left">
             Copyright &copy; 2021
             <div class="bullet"></div>
-            Kekraf <a href="#">email : kekraf@example.com</a>
+            Kekraf <a href="mailto: kekraf.store01@gmail.com">email : kekraf.store01@gmail.com</a>
           </div>
-          <div class="footer-right">2.3.0</div>
+          <div class="footer-right"></div>
         </footer>
       </div>
     </div>

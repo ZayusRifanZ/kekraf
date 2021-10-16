@@ -62,11 +62,12 @@
               >
                 <img
                   alt="image"
-                  src="/images/Profil.png"
+                  src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}"
                   class="rounded-circle mr-1"
+                  style="max-height: 30px;"
                 />
                 <div class="d-sm-none d-lg-inline-block">
-                  Hi, Ujang Maman
+                  Hi, {{ Auth::user()->name }}
                 </div></a
               >
               <div class="dropdown-menu dropdown-menu-right">
@@ -85,12 +86,12 @@
         <div class="main-sidebar" data-aos="fade-right">
           <aside id="sidebar-wrapper">
             <div class="sidebar-brand">
-              <a href="index.html">
+              <a href="{{ route('home') }}">
                 <img src="/images/logo_for_admin_dashboard.svg" alt="" class="mt-3" />
               </a>
             </div>
             <div class="sidebar-brand sidebar-brand-sm">
-              <a href="index.html">KE</a>
+              <a href="{{ route('home') }}">KE</a>
             </div>
             <ul class="sidebar-menu mt-4">
               <li class="nav-item {{ (request()->is('admin')) ? 'active' : '' }}">
@@ -156,11 +157,11 @@
 
         <footer class="main-footer">
           <div class="footer-left">
-            Copyright &copy; 2021
+            Copyright &copy; @php echo date('Y'); @endphp
             <div class="bullet"></div>
-            Kekraf <a href="#">email : kekraf@example.com</a>
+            Kekraf <a href="mailto: kekraf.store01@gmail.com">email : kekraf.store01@gmail.com</a>
           </div>
-          <div class="footer-right">2.3.0</div>
+          <div class="footer-right"></div>
         </footer>
       </div>
     </div>
