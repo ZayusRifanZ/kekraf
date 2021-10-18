@@ -66,21 +66,35 @@
               data-aos="fade-up"
               data-aos-delay="{{ $incrementProduct += 100 }}">
               <a href="{{ route('detail', $product->slug) }}" class="component-products d-block">
-                <div class="product-thumnail">
-                  <img
-                    src="
-                      @if ($product->galleries->count())
-                        {{ Storage::url($product->galleries->first()->photos) }}
-                      @else
-                        /images/bgHexEEE.png
-                      @endif
-                    "
-                    alt=""
-                    class="product-image"
-                  />
+                <div class="card">
+                  <div class="product-thumnail">
+                    <img
+                      src="
+                        @if ($product->galleries->count())
+                          {{ Storage::url($product->galleries->first()->photos) }}
+                        @else
+                          /images/bgHexEEE.png
+                        @endif
+                      "
+                      alt=""
+                      class="product-image"
+                      style="object-fit: cover;width: 175px;height: 175px;"
+                    />
+                  </div>
+                  <div class="card-body" style="padding: 0px 10px 20px 10px">
+                    <div 
+                      class="product-text"
+                      style="
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;"
+                    >
+                      {{ $product->name }}
+                    </div>
+                    <div class="product-price">Rp {{ number_format($product->price) }}</div>
+                  </div>
                 </div>
-                <div class="product-text text-justify">{{ $product->name }}</div>
-                <div class="product-price">Rp {{ $product->price }}</div>
               </a>
             </div>
               

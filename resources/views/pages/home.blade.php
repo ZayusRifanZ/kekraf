@@ -74,20 +74,24 @@
               >
                 <a href="{{ route('categories-detail', $category->slug) }}" class="component-categories d-block">
                   <div class="category-icon">
-                    <img src="{{ Storage::url($category->photo) }}" alt="" class="w-100" />
+                    <img 
+                      src="{{ Storage::url($category->photo) }}" 
+                      alt="Gambar Kategori" 
+                      class="w-100"
+                       />
                   </div>
                   <p class="category-text">{{ $category->name }}</p>
                 </a>
               </div>
                 
-            @empty
+              @empty
 
-            <div 
-              class="col-12 text-center py-5" 
-              data-aos="fade-up"
-              data-aos-delay="100">
-              Tidak ada Kategori yang ditemukan
-            </div>
+              <div 
+                class="col-12 text-center py-5" 
+                data-aos="fade-up"
+                data-aos-delay="100">
+                Tidak ada Kategori yang ditemukan
+              </div>
             @endforelse
             
           </div>
@@ -124,11 +128,20 @@
                         "
                         alt=""
                         class="product-image"
+                        style="object-fit: cover;width: 175px;height: 175px;"
                       />
                     </div>
-                    <div class="card-body" style="padding-top: 0px">
+                    <div class="card-body" style="padding: 0px 10px 20px 10px">
 
-                      <div class="product-text ">{{ $product->name }}</div>
+                      <div 
+                        class="product-text"
+                        style="
+                          overflow: hidden;
+                          display: -webkit-box;
+                          -webkit-line-clamp: 3;
+                          -webkit-box-orient: vertical;">
+                          {{ $product->name }}
+                        </div>
                       <div class="product-price">Rp {{ number_format($product->price) }}</div>
                     </div>
                   </div>
