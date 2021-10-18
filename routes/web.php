@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/search', 'HomeController@search')->name('search');
+
 Route::get('/categories', 'CategoryController@index')->name('categories');
 Route::get('/categories/{id}', 'CategoryController@detail')->name('categories-detail');
 
@@ -31,7 +33,8 @@ Route::get('/register/success', 'Auth\RegisterController@success')->name('regist
 
 
 
-Route::group(['middleware' => ['auth']], function(){
+// Route::group(['middleware' => ['auth', 'store']], function(){
+Route::group(['middleware' => ['auth', 'user']], function(){
     Route::get('/cart', 'CartController@index')
         ->name('cart');
     Route::delete('/cart/{id}', 'CartController@delete')
@@ -88,10 +91,15 @@ Route::prefix('admin')
     
 
 
-
-Route::get('/tes', function () {
-    return view('pages.admin.user.index');
+Route::group(['middleware' => ['auth', 'store']], function () {
+    Route::get('/dashboard-tes', function () {
+        return view('pages.admin.user.index');
+    });
 });
+
+Route::get('/user', function () {
+        return view('pages.user.dashboard-user');
+    });
 
 Auth::routes();
 

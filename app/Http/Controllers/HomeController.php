@@ -23,4 +23,13 @@ class HomeController extends Controller
             'products' => $products
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+
+        $getData = Product::where('name', 'like', "%".$search."%")->paginate();
+
+        return dd($getData);
+    }
 }

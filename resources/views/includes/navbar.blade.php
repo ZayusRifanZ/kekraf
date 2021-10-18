@@ -34,8 +34,9 @@
       </ul>
       @guest
       <ul class="navbar-nav ml-auto">
-        <form action="">
-          <input type="text" name="search" placeholder="Search.." />
+        <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
+          @csrf
+          <input type="text" name="search" placeholder="Cari barang Kekraf..." />
         </form>
         <li class="nav-item">
           <a class="nav-link btn btn-outline-primary" href="{{ route('register') }}">
@@ -50,9 +51,10 @@
 
       @auth
         <ul class="navbar-nav ml-auto d-none d-lg-flex">
-          <form action="">
-          <input type="text" name="search" placeholder="Search.."/>
-        </form>
+          <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
+            @csrf
+            <input type="text" name="search" placeholder="Cari barang Kekraf..."/>
+          </form>
           <li class="nav-item">
             <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
               @php
@@ -94,10 +96,10 @@
               <a href="{{ route('dashboard-admin') }}" class="dropdown-item">Dashboard</a>
               @else
               <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
-              @endif
               <a href="{{ route('dashboard-setting-account') }}" class="dropdown-item"
                 >Setting</a
               >
+              @endif
               <div class="dropdown-divider"></div>
               <a 
                 class="dropdown-item" 
@@ -123,8 +125,19 @@
             @endif
           </li>
           <li class="nav-item">
-            <a href="{{ route('cart') }}" class="nav-link d-inline-block"> Cart </a>
+            <a 
+              href="{{ route('cart') }}" 
+              class="nav-link d-inline-block"> 
+                Keranjang 
+                <span class="badge badge-primary">
+                  {{ $cart }}
+                </span> 
+              </a>
           </li>
+          <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
+            @csrf
+            <input type="text" name="search" placeholder="Cari barang Kekraf..."/>
+          </form>
         </ul>
       @endauth
     </div>
