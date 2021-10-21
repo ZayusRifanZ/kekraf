@@ -100,6 +100,7 @@
                 >Setting</a
               >
               @endif
+              <a href="{{ route('dashboard-user') }}" class="dropdown-item">Dashboard user</a>
               <div class="dropdown-divider"></div>
               <a 
                 class="dropdown-item" 

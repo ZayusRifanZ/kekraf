@@ -8,49 +8,56 @@
   <div class="main-content" data-aos="fade-up">
     <section class="section container-fluid">
       <div class="section-header">
-        <h1>Dashboard</h1>
-        <p>Lihat apa yang telah Anda buat hari ini!</p>
+        <h1>Riwayat Transaksi</h1>
+        <p>Transaksi yang sudah dilakukan</p>
       </div>
 
       <div class="section-body">
         <div class="dashboard-content">
           <div class="row">
-            
-            <div class="col-sm-6">
+            <div class="col">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-2 col-3">
-                      <img
-                        src="images/Profil.png"
-                        alt="photo-profile"
-                        class="rounded-circle w-100"
-                      />
-                      
+                    <div class="col-sm-6">
+                      <form action="">
+                        <div class="input-group d-flex">
+                          <input
+                            type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Cari daftar transaksi"
+                          />
+                          <div class="input-group-prepend">
+                            <button
+                              class="
+                                btn btn-outline-primary
+                                rounded-right
+                              "
+                            >
+                              <i class="fas fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </form>
                     </div>
-                    <div class="col-sm-10 col-9">
-                      <div class="dashboard-card-title">
-                        Hi Zayus, sekarang kamu sebagai
-                      </div>
-                      <div class="dashboard-card-subtitle-user">
-                        Member Kekraf
-                      </div>
+                    <div class="col-sm-6">
+                      <form action="">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i class="fas fa-calendar"></i>
+                            </div>
+                          </div>
+                          <input
+                            type="text"
+                            name="daterange"
+                            class="form-control daterange-cus"
+                            placeholder="Masukkan rentang tanggal"
+                          />
+                        </div>
+                      </form>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex">
-                    <div class="mr-2 dashboard-card-title">Transaksi</div>
-                    <div class="dashboard-card-title-select">
-                      Selama 2021
-                    </div>
-                  </div>
-                  <div class="dashboard-card-subtitle-user">
-                    Rp 300,000
                   </div>
                 </div>
               </div>
@@ -58,8 +65,8 @@
           </div>
 
           <div class="row">
-            <div class="col-12 mt-2">
-              <h2 class="section-title">Riwayat Transaksi</h2>
+            <div class="col-12">
+              <h2 class="section-title">Riwayat Semua Transaksi</h2>
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex">
@@ -83,7 +90,7 @@
                   <div class="row mt-2">
                     <div class="col-sm-1 col-3">
                       <img
-                        src="images/KacaMataAntiRadiasi.jpg"
+                        src="/images/KacaMataAntiRadiasi.jpg"
                         alt=""
                         class="w-100 rounded-lg"
                       />
@@ -142,7 +149,7 @@
                   <div class="row mt-2">
                     <div class="col-sm-1 col-3">
                       <img
-                        src="images/pencil-4.jpg"
+                        src="/images/pencil-4.jpg"
                         alt=""
                         class="w-100 rounded-lg"
                       />
@@ -178,7 +185,6 @@
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
@@ -187,3 +193,58 @@
   </div>
 @endsection
 
+@push('addon-style')
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css"
+    />
+@endpush
+
+@push('addon-script')
+
+{{-- <script
+  type="text/javascript"
+  src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"
+></script> --}}
+<script
+  type="text/javascript"
+  src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+></script>
+<script
+  type="text/javascript"
+  src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"
+></script>
+
+<script>
+  $(function () {
+    $('input[name="daterange"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+        applyLabel: "Terapkan",
+        cancelLabel: "Bersihkan",
+      },
+      applyClass: "btn-primary",
+    });
+
+    $('input[name="daterange"]').on(
+      "apply.daterangepicker",
+      function (ev, picker) {
+        $(this).val(
+          picker.startDate.format("MM/DD/YYYY") +
+            " - " +
+            picker.endDate.format("MM/DD/YYYY")
+        );
+      }
+    );
+
+    $('input[name="daterange"]').on(
+      "cancel.daterangepicker",
+      function (ev, picker) {
+        $(this).val("");
+      }
+    );
+  });
+</script>
+    
+@endpush

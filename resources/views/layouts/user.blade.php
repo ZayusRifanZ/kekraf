@@ -133,28 +133,31 @@
               <a href="{{ route('home') }}">KE</a>
             </div>
             <ul class="sidebar-menu mt-4">
-              <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
-                <a href="{{ url('/user') }}" class="nav-link">
+              <li class="nav-item {{ (request()->is('user')) ? 'active' : '' }}">
+                <a href="{{ route('dashboard-user') }}" class="nav-link">
                   <i class="fas fa-fire"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
 
-              <li class="nav-item {{ (request()->is('dashboard/transaction*')) ? 'active' : '' }}">
-                <a class="nav-link" href="#"
+              <li class="nav-item {{ (request()->is('user/transaction*')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('transaction.index') }}"
                   ><i class="fas fa-money-bill-wave"></i>
-                  <span>Daftar Transaksi</span></a
+                  <span>Riwayat Transaksi</span></a
                 >
               </li>
-              <li class="nav-item {{ (request()->is('dashboard/setting')) ? 'active' : '' }}">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-store"><div class="card-badge-notif">1</div></i>
-                  <span>Proses Pembayaran </span>
+              <li class="nav-item {{ (request()->is('user/payment')) ? 'active' : '' }}">
+                <a href="{{ route('payment.index') }}" class="nav-link">
+                  <i class="fas fa-store"></i>
+                  <span style="line-height: normal; letter-spacing: normal">
+                    Proses Pembayaran
+                  </span>
+                  <div class="badge badge-primary">1</div>
                 </a>
               </li>
 
-              <li class="nav-item {{ (request()->is('dashboard/account*')) ? 'active' : '' }}">
-                <a href="{{ route('dashboard-setting-account') }}" class="nav-link">
+              <li class="nav-item {{ (request()->is('user/account*')) ? 'active' : '' }}">
+                <a href="{{ route('account.index') }}" class="nav-link">
                   <i class="fas fa-user"></i>
                   <span>Akun Saya</span>
                 </a>
@@ -195,10 +198,14 @@
 
     @stack('prepend-script')
       <!-- General JS Scripts -->
-      <script
+      {{-- <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"
+      ></script> --}}
+      <script
+        type="text/javascript"
+        src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"
       ></script>
       <script
         src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
