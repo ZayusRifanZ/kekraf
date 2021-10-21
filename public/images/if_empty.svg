@@ -1,0 +1,29 @@
+<svg width="230" height="143" viewBox="0 0 230 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="115" cy="112.5" rx="115" ry="30.5" fill="#8693A9"/>
+<ellipse cx="115" cy="103.5" rx="115" ry="30.5" fill="#F4F4F4"/>
+<circle cx="109" cy="21" r="17" stroke="#3E6BB3" stroke-width="8"/>
+<circle cx="109" cy="21" r="10.5" stroke="#F4F4F4" stroke-width="5"/>
+<g filter="url(#filter0_d_783:16367)">
+<path d="M71 25C71 22.7909 72.7909 21 75 21H109V93H85C77.268 93 71 86.732 71 79V25Z" fill="#3E6BB3"/>
+</g>
+<path d="M109 21H143C145.209 21 147 22.7909 147 25V79C147 86.732 140.732 93 133 93H109V21Z" fill="#F4F4F4"/>
+<path d="M71 25C71 22.7909 72.7909 21 75 21H109V93H85C77.268 93 71 86.732 71 79V25Z" fill="#3E6BB3"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M71.5251 22.5251C72.892 21.1583 75.108 21.1583 76.4749 22.5251L138 84.0503C139.367 85.4171 139.367 87.6332 138 89C136.633 90.3669 134.417 90.3669 133.05 89L71.5251 27.4749C70.1583 26.108 70.1583 23.892 71.5251 22.5251Z" fill="#F4F4F4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M126.525 82.4749L104.05 59.9999L109 55.0502L131.475 77.5251C132.842 78.892 132.842 81.108 131.475 82.4749C130.108 83.8417 127.892 83.8417 126.525 82.4749Z" fill="#3E6BB3"/>
+<path d="M109 65L99 55H109V65Z" fill="#F4F4F4"/>
+<circle cx="142.5" cy="88.5" r="16.5" fill="#3E6BB3"/>
+<circle cx="142.5" cy="88.5" r="10.5" fill="#F4F4F4"/>
+<path d="M140.537 92.131C139.982 92.131 139.532 92.6248 139.532 93.2282C139.532 93.8317 139.982 94.3254 140.537 94.3254C141.093 94.3254 141.548 93.8317 141.548 93.2282C141.548 92.6248 141.093 92.131 140.537 92.131ZM137.505 83.3536V84.4508H138.516L140.335 88.6146L139.653 89.9586C139.572 90.1122 139.527 90.2933 139.527 90.4853C139.527 91.0887 139.982 91.5824 140.537 91.5824H146.602V90.4853H140.75C140.679 90.4853 140.623 90.4249 140.623 90.3481L140.638 90.2823L141.093 89.3881H144.858C145.237 89.3881 145.571 89.1632 145.743 88.8231L147.552 85.2627C147.593 85.1859 147.613 85.0927 147.613 84.9994C147.613 84.6977 147.385 84.4508 147.107 84.4508H139.633L139.158 83.3536H137.505ZM145.591 92.131C145.035 92.131 144.586 92.6248 144.586 93.2282C144.586 93.8317 145.035 94.3254 145.591 94.3254C146.147 94.3254 146.602 93.8317 146.602 93.2282C146.602 92.6248 146.147 92.131 145.591 92.131Z" fill="#3E6BB3"/>
+<defs>
+<filter id="filter0_d_783:16367" x="67" y="21" width="46" height="80" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_783:16367"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_783:16367" result="shape"/>
+</filter>
+</defs>
+</svg>
