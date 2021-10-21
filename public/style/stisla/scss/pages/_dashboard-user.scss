@@ -1,0 +1,64 @@
+.section {
+    .dashboard-content {
+        // new
+        .dashboard-card-title-select {
+            padding: 2px 10px 2px 10px;
+            background: color(cultured);
+            border-radius: 13px;
+            font-size: small;
+            text-align: center;
+        }
+
+        .dashboard-card-subtitle-user {
+            font-weight: 500;
+            font-size: x-large;
+            color: color(secondary);
+        }
+        // tutup new
+        // new
+        .card-body {
+            .info-card-transaction {
+                font-size: small;
+                color: #8693a9;
+            }
+            .info-card-badge-custom-primary {
+                background-color: color(primary);
+                padding: 2px 10px 2px 10px;
+                color: color(white);
+                font-size: small;
+            }
+            .info-card-badge-custom-danger {
+                background-color: color(danger);
+                padding: 2px 10px 2px 10px;
+                color: color(white);
+                font-size: small;
+            }
+
+            .product-name-transaction {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                /* max-width: ; */
+                font-weight: 500;
+                font-size: large;
+                color: color(secondary);
+            }
+
+            .text-small-secondary {
+                font-size: small;
+                color: color(secondary);
+            }
+            .text-medium-secondary {
+                font-size: medium;
+                color: color(secondary);
+            }
+            .text-large-secondary {
+                font-weight: 500;
+                font-size: large;
+
+                color: color(secondary);
+            }
+        }
+        // tutup new
+    }
+}

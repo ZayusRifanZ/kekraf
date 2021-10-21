@@ -97,9 +97,15 @@ Route::group(['middleware' => ['auth', 'store']], function () {
     });
 });
 
-Route::get('/user', function () {
-        return view('pages.user.dashboard-user');
+Route::prefix('user')
+    ->namespace('User')
+    ->group(function(){
+        Route::get('/', 'DashboardController@index')->name('dashboard-user');
+        Route::resource('transaction', 'TransactionController');
+        Route::resource('payment', 'PaymentController');
+        Route::resource('account', 'AccountController');
     });
+
 
 Auth::routes();
 
