@@ -2278,24 +2278,6 @@ h6 .badge {
           box-shadow: rgba(62, 107, 179, 0.2) rgba(0, 0, 0, 0.03);
 }
 
-.navbar .card-badge {
-  display: inline-block;
-  min-width: 2em;
-  max-height: 2em;
-  padding: 0.3em;
-  border-radius: 50%;
-  font-size: 10px;
-  text-align: center;
-  background: #47c363;
-  color: #ffffff;
-  margin-left: -10px;
-}
-
-.navbar .card-badge span {
-  position: relative;
-  top: -7px;
-}
-
 .navbar-bg {
   content: " ";
   position: absolute;
@@ -4512,5 +4494,21 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
 .card-dashboard-product .card-body .img-card-custom:hover, .card-dashboard-product .card-body .img-card-custom:focus {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.navbar .card-badge {
+  display: inline-block;
+  min-width: 2em;
+  max-height: 2em;
+  padding: 0.3em;
+  border-radius: 50%;
+  font-size: 10px;
+  text-align: center;
+  background: #38465b;
+  color: #ffffff;
+  margin-left: -10px;
+  line-height: normal;
+  position: relative;
+  top: -7px;
 }
 /*# sourceMappingURL=style.css.map */
