@@ -84,6 +84,18 @@
               </a>
               
             </li>
+            <li>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm mt-1"
+                style="background-color: #38465b; border-color: #38465b"
+                data-toggle="modal"
+                data-target="#openStore"
+              >
+                Buka toko
+              </button>
+              
+            </li>
             <li class="dropdown">
               <a
                 href="#"
@@ -101,13 +113,11 @@
                 </div></a
               >
               <div class="dropdown-menu dropdown-menu-right">
-                <a href="{{ route('dashboard') }}" class="dropdown-item has-icon">
+                <a href="{{ route('dashboard-user') }}" class="dropdown-item has-icon">
                   <i class="fas fa-fire"></i> Dashboard
                 </a>
 
-                {{-- <a href="{{ route('dashboard-setting-account') }}" class="dropdown-item has-icon">
-                  <i class="fas fa-cog"></i> Settings
-                </a> --}}
+                
                 <div class="dropdown-divider"></div>
                 <a 
                   class="dropdown-item has-icon text-danger" 
@@ -185,6 +195,8 @@
         {{-- <!-- Main Content --> --}}
         @yield('content')
 
+        @include('includes.modals.openStore')
+
         <footer class="main-footer">
           <div class="footer-left">
             Copyright &copy; 2021
@@ -193,6 +205,13 @@
           </div>
           <div class="footer-right"></div>
         </footer>
+
+        @error('store-name')
+          <p>Hai aku disni yah </p>
+          <script>
+            alert('yuhuu guys')
+          </script>
+        @enderror
       </div>
     </div>
 

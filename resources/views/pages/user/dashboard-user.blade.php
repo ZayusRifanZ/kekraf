@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('title')
-    Kekraf - Dashboard
+    Kekraf - Dashboard User
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-2 col-3">
+                    <div class="col-md-2 col-sm-3 col-3">
                       <img
                         src="images/Profil.png"
                         alt="photo-profile"
@@ -28,7 +28,7 @@
                       />
                       
                     </div>
-                    <div class="col-sm-10 col-9">
+                    <div class="col-md 10 col-sm-9 col-9">
                       <div class="dashboard-card-title">
                         Hi Zayus, sekarang kamu sebagai
                       </div>

@@ -4511,4 +4511,10 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   position: relative;
   top: -7px;
 }
+
+@media (max-width: 767.98px) {
+  .navbar .card-badge {
+    display: inline-block !important;
+  }
+}
 /*# sourceMappingURL=style.css.map */

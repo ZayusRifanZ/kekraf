@@ -101,6 +101,7 @@ Route::prefix('user')
     ->namespace('User')
     ->group(function(){
         Route::get('/', 'DashboardController@index')->name('dashboard-user');
+        Route::post('/', 'DashboardController@openStore')->name('dashboard-user-openStore');
         Route::resource('transaction', 'TransactionController');
         Route::resource('payment', 'PaymentController');
         Route::resource('account', 'AccountController');

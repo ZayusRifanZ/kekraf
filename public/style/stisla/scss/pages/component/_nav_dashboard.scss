@@ -15,5 +15,9 @@
 
         position: relative;
         top: -7px;
+
+        @include media-breakpoint-down(sm) {
+            display: inline-block !important;
+        }
     }
 }

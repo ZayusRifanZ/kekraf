@@ -14,7 +14,7 @@
 
       <div class="section-body">
         <div class="dashboard-content">
-          <!-- <h2 class="section-title">Menunggu Pembayaran</h2> -->
+          <h2 class="section-title">Menunggu Pembayaran</h2> 
           <div class="card">
             <div class="card-body">
               <div class="row justify-content-between mb-2">
@@ -81,8 +81,8 @@
 
           
           
-            {{-- // jika field kosong --}}
-            <div class="card">
+          {{-- // jika field kosong --}}
+          {{-- <div class="card">
             <div class="card-body">
               <div class="row justify-content-center">
                 <div class="col-sm-5 text-center">
@@ -105,11 +105,15 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
           <div class="row"></div>
         </div>
       </div>
     </section>
   </div>
+
+  {{-- modal --}}
+  @include('includes.modals.modal-userPayment')
+
 @endsection
 
