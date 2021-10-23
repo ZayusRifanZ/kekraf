@@ -206,12 +206,6 @@
           <div class="footer-right"></div>
         </footer>
 
-        @error('store-name')
-          <p>Hai aku disni yah </p>
-          <script>
-            alert('yuhuu guys')
-          </script>
-        @enderror
       </div>
     </div>
 

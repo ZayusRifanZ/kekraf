@@ -36,7 +36,7 @@
       <ul class="navbar-nav ml-auto">
         <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
           @csrf
-          <input type="text" name="search" placeholder="Cari barang Kekraf..." />
+          <input type="text" name="search" placeholder="Cari produk ekonomi kreatif..." value="{{ $search }}" />
         </form>
         <li class="nav-item">
           <a class="nav-link btn btn-outline-primary" href="{{ route('register') }}">
@@ -53,7 +53,7 @@
         <ul class="navbar-nav ml-auto d-none d-lg-flex">
           <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
             @csrf
-            <input type="text" name="search" placeholder="Cari barang Kekraf..."/>
+            <input type="text" name="search" placeholder="Cari produk ekonomi kreatif..."  value="{{ $search }}"/>
           </form>
           <li class="nav-item">
             <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
@@ -137,7 +137,7 @@
           </li>
           <form action="{{ route('search') }}" method="GET" enctype="multipart/form-data">
             @csrf
-            <input type="text" name="search" placeholder="Cari barang Kekraf..."/>
+            <input type="text" name="search" placeholder="Cari produk ekonomi kreatif..."  value="{{ $search }}"/>
           </form>
         </ul>
       @endauth

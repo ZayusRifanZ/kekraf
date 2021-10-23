@@ -1,0 +1,27 @@
+.page-home {
+    .kekraf-new-products {
+        .text-search {
+            // background-color: blue;
+            font-size: 14px;
+            color: color("tertiary");
+        }
+        .text-search-right {
+            font-size: 14px;
+            color: color("tertiary");
+
+            select {
+                border: 1px solid color("tertiary");
+                background-color: color("cultured");
+                color: color("tertiary");
+                width: 175px !important;
+            }
+            @include media-breakpoint-up(sm) {
+                text-align: end;
+            }
+            @media (max-width: 575.98px) {
+                text-align: start;
+                margin-top: 15px;
+            }
+        }
+    }
+}

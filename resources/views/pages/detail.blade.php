@@ -81,7 +81,7 @@
 
           <div class="col-lg-6" data-aos="fade-up">
             <div class="product">{{ $product->name }}</div>
-            <a href="#" class="store d-block">Kunjungi Toko {{ $product->user->store_name }}</a>
+            <a href="{{ route('store-product', $product->users_id) }}" class="store d-block">Kunjungi Toko {{ $product->user->store_name }}</a>
 
             <div class="pricing">
               <span class="price">Rp {{ number_format($product->price) }}</span>

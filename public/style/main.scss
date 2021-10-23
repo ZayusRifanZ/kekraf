@@ -4,6 +4,7 @@
 @import "fonts";
 @import "global";
 @import "navbar";
+@import "variable";
 
 @import "components/search";
 @import "components/buttons";
@@ -18,3 +19,5 @@
 @import "pages/cart";
 @import "pages/auth";
 @import "pages/success";
+@import "pages/search_pages";
+@import "pages/store_pages";

@@ -11244,4 +11244,45 @@ nav form input[type="text"] {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.5);
           box-shadow: 0 0 0 0.2rem rgba(33, 37, 41, 0.5);
 }
+
+.page-home .kekraf-new-products .text-search {
+  font-size: 14px;
+  color: #38465b;
+}
+
+.page-home .kekraf-new-products .text-search-right {
+  font-size: 14px;
+  color: #38465b;
+}
+
+.page-home .kekraf-new-products .text-search-right select {
+  border: 1px solid #38465b;
+  background-color: #f4f4f4;
+  color: #38465b;
+  width: 175px !important;
+}
+
+@media (min-width: 576px) {
+  .page-home .kekraf-new-products .text-search-right {
+    text-align: end;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .page-home .kekraf-new-products .text-search-right {
+    text-align: start;
+    margin-top: 15px;
+  }
+}
+
+.page-home .kekraf-new-products .store {
+  font-weight: 500;
+  font-size: 20px;
+  color: #00173d;
+}
+
+.page-home .kekraf-new-products .store-text {
+  font-size: 16px;
+  color: #38465b;
+}
 /*# sourceMappingURL=main.css.map */
