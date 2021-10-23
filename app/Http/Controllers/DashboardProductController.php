@@ -25,7 +25,7 @@ class DashboardProductController extends Controller
             ->where('users_id', Auth::user()->id)
             ->get();
         
-        return view('pages.dashboard-products', [
+        return view('pages.store.dashboard-products', [
             'products' => $product, 
         ]);
     }
@@ -35,7 +35,7 @@ class DashboardProductController extends Controller
         $product = Product::with(['galleries','user','category'])->findOrFail($id);
         $categories = Category::all();
 
-        return view('pages.dashboard-products-details', [
+        return view('pages.store.dashboard-products-details', [
             'product' => $product,
             'categories' => $categories
         ]);
@@ -63,7 +63,7 @@ class DashboardProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('pages.dashboard-products-create', [
+        return view('pages.store.dashboard-products-create', [
             'categories' => $categories
         ]);
     }

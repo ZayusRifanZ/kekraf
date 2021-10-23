@@ -24,7 +24,7 @@ class DashboardTransactionController extends Controller
             ->whereHas('transaction', function($transaction){
                 $transaction->where('users_id', Auth::user()->id);
             })->get();
-        return view('pages.dashboard-transaction',[
+        return view('pages.store.dashboard-transaction',[
             'sellTransactions' => $sellTransactions,
             'buyTransactions' => $buyTransactions
         ]);
@@ -34,7 +34,7 @@ class DashboardTransactionController extends Controller
     {
         $transaction = TransactionDetail::with('transaction.user', 'product.galleries')
             ->findOrFail($id);
-        return view('pages.dashboard-transaction-details', [
+        return view('pages.store.dashboard-transaction-details', [
             'transaction' => $transaction
         ]);
     }

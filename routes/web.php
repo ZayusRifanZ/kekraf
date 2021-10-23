@@ -35,8 +35,7 @@ Route::get('/register/success', 'Auth\RegisterController@success')->name('regist
 Route::get('/store/{id}', 'HomeController@storeProduct')->name('store-product');
 
 
-// Route::group(['middleware' => ['auth', 'store']], function(){
-Route::group(['middleware' => ['auth', 'user']], function(){
+Route::group(['middleware' => ['auth', 'store']], function(){
     Route::get('/cart', 'CartController@index')
         ->name('cart');
     Route::delete('/cart/{id}', 'CartController@delete')
@@ -101,6 +100,7 @@ Route::group(['middleware' => ['auth', 'store']], function () {
 
 Route::prefix('user')
     ->namespace('User')
+    ->middleware(['auth', 'user'])
     ->group(function(){
         Route::get('/', 'DashboardController@index')->name('dashboard-user');
         Route::post('/', 'DashboardController@openStore')->name('dashboard-user-openStore');

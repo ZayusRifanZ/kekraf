@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
         $customer = User::count();
         
-        return view('pages.dashboard', [
+        return view('pages.store.dashboard', [
             'transaction_count' => $transactions->count(),
             'transaction_data' => $transactions->get(),
             'revenue' => $revenue,
