@@ -44,7 +44,7 @@ class HomeController extends Controller
                 $products = Product::where('name', 'like', "%".$search."%")->orderBy('price', 'asc')->paginate(12);
             }
         }else {
-            return dd([$search, $filter]);
+            // return dd([$search, $filter]);
             // return redirect()->route('home');
         }
 
