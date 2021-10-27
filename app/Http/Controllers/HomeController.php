@@ -29,7 +29,6 @@ class HomeController extends Controller
         $search = $request->search;
         $filter = $request->filter;
 
-        echo $filter;
         if (isset($search)){
             if ($filter == 0 || $filter == null){
                 $products = Product::where('name', 'like', "%".$search."%")->paginate(12);

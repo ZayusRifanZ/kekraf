@@ -125,10 +125,16 @@
                   
               @empty
                 <div 
-                  class="col-12 text-center py-5" 
+                  class="col-12" 
                   data-aos="fade-up"
                   data-aos-delay="100">
-                  Tidak ada Produk yang ditemukan
+                    <div class="card">
+                      <div class="card-body text-center pt-3 pb-4" >
+                        <img src="/images/if_empty.svg" alt="" class="mt-4">
+                        <h5 class="mt-2">Oops, produk tidak ditemukan</h5>
+                        <div class="text-search mb-5">Silahkan ganti kata kunci yang lainnya</div>
+                      </div>
+                    </div>
                 </div>
               @endforelse
             
@@ -142,11 +148,15 @@
 
         @else
           <div class="row">
-            <div class="col-12">
+            <div 
+              class="col-12" 
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div class="card">
                 <div class="card-body text-center pt-3 pb-4" >
                   <img src="/images/if_empty.svg" alt="" class="mt-4">
-                  <h5 class="mt-2">Oops, produk nggak ditemukan</h5>
+                  <h5 class="mt-2">Oops, produk tidak ditemukan</h5>
                   <div class="text-search mb-5">Silahkan ganti kata kunci yang lainnya</div>
                 </div>
               </div>
