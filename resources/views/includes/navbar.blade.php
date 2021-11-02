@@ -84,8 +84,12 @@
               "
             >
               <img
-                src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}"
-                alt=""
+                @if (isset(Auth::user()->profile_photo))
+                src="{{ Storage::url(Auth::user()->profile_photo) }}"
+                @else
+                src="/images/user_default.svg"
+                @endif
+                alt="Image Profil"
                 class="rounded-circle mr-2 profile-picture"
                 style="width: 45px; max-height: 45px;"
               />
@@ -94,13 +98,14 @@
             <div class="dropdown-menu">
               @if (Auth::user()->roles == 'ADMIN')
               <a href="{{ route('dashboard-admin') }}" class="dropdown-item">Dashboard</a>
-              @else
+              @elseif (Auth::user()->roles == 'STORE')
               <a href="{{ route('dashboard') }}" class="dropdown-item">Dashboard</a>
               <a href="{{ route('dashboard-setting-account') }}" class="dropdown-item"
                 >Setting</a
               >
+              @else
+              <a href="{{ route('dashboard-user') }}" class="dropdown-item">Dashboard </a>
               @endif
-              <a href="{{ route('dashboard-user') }}" class="dropdown-item">Dashboard user</a>
               <div class="dropdown-divider"></div>
               <a 
                 class="dropdown-item" 

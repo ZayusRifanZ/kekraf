@@ -62,7 +62,11 @@
               >
                 <img
                   alt="image"
-                  src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}"
+                  @if (isset(Auth::user()->profile_photo))
+                  src="{{ Storage::url(Auth::user()->profile_photo) }}"
+                  @else
+                  src="/images/user_default.svg"
+                  @endif
                   class="rounded-circle mr-1"
                   style="max-height: 30px;"
                 />
@@ -119,8 +123,8 @@
                   <span>Kategori</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
+              <li class="nav-item {{ (request()->is('admin/category*')) ? 'active' : '' }}">
+                <a href="{{ route('transaction.index') }}" class="nav-link">
                   <i class="fas fa-money-bill-wave"></i>
                   <span>Transaksi</span>
                 </a>

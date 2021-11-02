@@ -104,7 +104,11 @@
               >
                 <img
                   alt="image"
-                  src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}"
+                  @if (isset(Auth::user()->profile_photo))
+                  src="{{ Storage::url(Auth::user()->profile_photo) }}"
+                  @else
+                  src="/images/user_default.svg"
+                  @endif
                   class="rounded-circle mr-1"
                   style="max-height: 30px;"
                 />
@@ -151,7 +155,7 @@
               </li>
 
               <li class="nav-item {{ (request()->is('user/transaction*')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('transaction.index') }}"
+                <a class="nav-link" href="{{ route('transaction-user.index') }}"
                   ><i class="fas fa-money-bill-wave"></i>
                   <span>Riwayat Transaksi</span></a
                 >
