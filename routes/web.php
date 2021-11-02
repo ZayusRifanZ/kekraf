@@ -87,6 +87,7 @@ Route::prefix('admin')
         Route::resource('user', 'UserController');
         Route::resource('product', 'ProductController');
         Route::resource('product-gallery', 'ProductGalleryController');
+        Route::resource('transaction', 'TransactionController');
     });
 
     
@@ -104,7 +105,7 @@ Route::prefix('user')
     ->group(function(){
         Route::get('/', 'DashboardController@index')->name('dashboard-user');
         Route::post('/', 'DashboardController@openStore')->name('dashboard-user-openStore');
-        Route::resource('transaction', 'TransactionController');
+        Route::resource('transaction-user', 'TransactionController');
         Route::resource('payment', 'PaymentController');
         Route::resource('account', 'AccountController');
     });
