@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->integer('zip_code');
             $table->string('country');
             $table->string('phone_number');
-            $table->string('strore_name');
+            $table->string('store_name');
             $table->integer('categories_id');
             $table->integer('store_status');
             $table->string('profile_photo');
