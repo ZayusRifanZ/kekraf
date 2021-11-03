@@ -26,6 +26,7 @@
                     value="{{ old('name') }}" 
                     autocomplete="name" 
                     autofocus
+                    placeholder="Masukkan nama panjang"
                   >
                   @error('name')
                     <span class="invalid-feedback" role="alert">
@@ -45,7 +46,8 @@
                     :class="{ 'is-invalid': this.email_unavailable }"
                     name="email" 
                     value="{{ old('email') }}"
-                    autocomplete="email">
+                    autocomplete="email"
+                    placeholder="Masukkan alamat email">
                   @error('email')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -60,7 +62,8 @@
                     class="form-control @error('password') is-invalid @enderror" 
                     name="password" 
                     required 
-                    autocomplete="new-password" >
+                    autocomplete="new-password" 
+                    placeholder="Masukkan kata sandi">
 
                   @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -76,7 +79,8 @@
                     class="form-control"
                     name="password_confirmation" 
                     required 
-                    autocomplete="new-password">
+                    autocomplete="new-password"
+                    placeholder="Konfirmasi kata sandi ">
                 </div>
                 <div class="form-group">
                   <label for="">Toko</label>
@@ -127,7 +131,8 @@
                     value="{{  old('store_name') }}"
                     required
                     autocomplete
-                    autofocus>
+                    autofocus
+                    placeholder="Masukkan nama toko">
                   {{-- @error('store_name') --}}
                   @error('name')
                     <span class="invalid-feedback" role="alert">

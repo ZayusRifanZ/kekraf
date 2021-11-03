@@ -30,7 +30,10 @@ Route::post('/checkout/callback', 'CheckoutController@callback')->name('midtrans
 
 Route::get('/success', 'CartController@success')->name('success');
 
-Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
+// Route::get('/register/success', 'Auth\RegisterController@success')->name('register-success');
+Route::get('/register/success', function(){
+    return view('auth.success');
+});
 
 Route::get('/store/{id}', 'HomeController@storeProduct')->name('store-product');
 
@@ -80,7 +83,7 @@ Route::group(['middleware' => ['auth', 'store']], function(){
 
 Route::prefix('admin')
     ->namespace('Admin')
-    ->middleware(['auth', 'admin'])
+    ->middleware(['auth', 'admin', 'verified'])
     ->group(function(){
         Route::get('/', 'DashboardController@index')->name('dashboard-admin');
         Route::resource('category', 'CategoryController');
@@ -93,7 +96,7 @@ Route::prefix('admin')
     
 
 
-Route::group(['middleware' => ['auth', 'store']], function () {
+Route::group(['middleware' => ['auth', 'store', 'verified']], function () {
     Route::get('/dashboard-tes', function () {
         return view('pages.admin.user.index');
     });
@@ -101,7 +104,7 @@ Route::group(['middleware' => ['auth', 'store']], function () {
 
 Route::prefix('user')
     ->namespace('User')
-    ->middleware(['auth', 'user'])
+    ->middleware(['auth', 'user', 'verified'])
     ->group(function(){
         Route::get('/', 'DashboardController@index')->name('dashboard-user');
         Route::post('/', 'DashboardController@openStore')->name('dashboard-user-openStore');
@@ -110,11 +113,12 @@ Route::prefix('user')
         Route::resource('account', 'AccountController');
     });
 
-Route::get('/tes', function(){
-    return view('pages.tes');
-});
+Route::get('/loghome', function(){
+    return redirect('/');
+})->name('log-home')->middleware('verified');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+// Auth::routes();
 
 

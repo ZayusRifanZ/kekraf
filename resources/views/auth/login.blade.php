@@ -28,7 +28,9 @@
                     type="email" 
                     class="form-control @error('email') is-invalid @enderror" 
                     name="email" value="{{ old('email') }}" 
-                    required autocomplete="email" autofocus
+                    required autocomplete="email" 
+                    placeholder="Masukkan alamat email"
+                    autofocus
                   >
                   @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -44,7 +46,10 @@
                     id="password" 
                     type="password" 
                     class="form-control @error('password') is-invalid @enderror" 
-                    name="password" required autocomplete="current-password"
+                    name="password" 
+                    placeholder="Masukkan kata sandi"
+                    required 
+                    autocomplete="current-password"
                   >
                   @error('password')
                     <span class="invalid-feedback" role="alert">
@@ -52,7 +57,17 @@
                     </span>
                   @enderror
                 </div>
-                <div class="row btn-auth-login">
+                <div class="form-group text-right">
+                  @if (Route::has('password.request'))
+                    <a 
+                      class="btn btn-link " 
+                      href="{{ route('password.request') }}"
+                      style="color: #3e6bb3">
+                      {{ __('Lupa Kata Sandi?') }}
+                    </a>
+                  @endif
+                </div>
+                <div class="row btn-auth-login mt-0">
                   <div class="col-lg-6">
                     <button
                       type="submit"
@@ -68,6 +83,7 @@
                       Daftar
                     </a>
                   </div>
+                  
                 </div>
               </form>
             </div>

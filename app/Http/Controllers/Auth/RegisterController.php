@@ -31,7 +31,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::SUCCESS;
+    // protected $redirectTo = '/success';
+    protected $redirectTo = '/register/success';
 
     /**
      * Create a new controller instance.
@@ -41,6 +44,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        // var_dump($this->redirectTo);
+        // var_dump(route('register-success'));
     }
 
     /**
@@ -76,7 +81,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
             'store_name' => ['nullable', 'string', 'max:255'],
             'categories_id' => ['nullable', 'integer', 'exists:categories,id'],
             'is_store_open' => ['required']
@@ -91,6 +96,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // return dd($data);
+        // var_dump($data);
+        // return redirect(route('register-success'));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -98,11 +106,13 @@ class RegisterController extends Controller
             'store_name' => isset($data['store_name']) ? $data['store_name'] : '',
             'categories_id' => isset($data['categories_id']) ? $data['categories_id'] : Null,
             'store_status' => isset($data['is_store_open']) ? 1 : 0,
+            'roles' => isset($data['store_name']) ? 'STORE' : 'USER',
             
         ]);
     }
 
     public function success(){
+        // $this->middleware(['auth', 'verified']);
         return view('auth.success');
     }
 
@@ -110,4 +120,9 @@ class RegisterController extends Controller
     {
         return User::where('email', $request->email)->count() > 0 ? 'Unavailable' : 'Available';
     }
+
+    // protected function redirectTo() : string
+    // {
+    //     return '/register/success';
+    // }
 }

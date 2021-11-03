@@ -19,7 +19,7 @@
             <a href="{{ route('dashboard') }}" class="btn btn-primary btn-block mt-5"
               >Dashboard</a
             >
-            <a href="{{ route('home') }}" class="btn btn-cultured btn-block"
+            <a href="{{ route('log-home') }}" class="btn btn-cultured btn-block"
               >Mulai Belanja</a
             >
           </div>

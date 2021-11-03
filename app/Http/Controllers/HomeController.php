@@ -14,6 +14,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
     public function index()
     {
         $categories = Category::take(6)->get();
