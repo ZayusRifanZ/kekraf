@@ -123,7 +123,7 @@
                   <span>Kategori</span>
                 </a>
               </li>
-              <li class="nav-item {{ (request()->is('admin/category*')) ? 'active' : '' }}">
+              <li class="nav-item {{ (request()->is('admin/transaction*')) ? 'active' : '' }}">
                 <a href="{{ route('transaction.index') }}" class="nav-link">
                   <i class="fas fa-money-bill-wave"></i>
                   <span>Transaksi</span>
