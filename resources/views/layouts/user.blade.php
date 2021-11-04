@@ -171,7 +171,7 @@
               </li>
 
               <li class="nav-item {{ (request()->is('user/account*')) ? 'active' : '' }}">
-                <a href="{{ route('account.index') }}" class="nav-link">
+                <a href="{{ route('user-account') }}" class="nav-link">
                   <i class="fas fa-user"></i>
                   <span>Akun Saya</span>
                 </a>

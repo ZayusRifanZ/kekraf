@@ -35,7 +35,13 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-3">
-                        <img src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}" alt="" class="w-100" />
+                        <img 
+                          @if (isset(Auth::user()->profile_photo))
+                          src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}" 
+                          @else
+                          src="/images/user_default.svg" 
+                          @endif
+                          alt="" class="w-100" />
                         <input
                           type="file"
                           id="file"

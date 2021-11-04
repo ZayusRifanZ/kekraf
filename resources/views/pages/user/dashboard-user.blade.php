@@ -22,7 +22,11 @@
                   <div class="row">
                     <div class="col-md-2 col-sm-3 col-3">
                       <img
-                        src="images/Profil.png"
+                        @if (isset(Auth::user()->profile_photo))
+                        src="{{ Storage::url(Auth::user()->profile_photo) }}"
+                        @else 
+                        src="/images/user_default.svg"
+                        @endif
                         alt="photo-profile"
                         class="rounded-circle w-100"
                       />
@@ -30,7 +34,7 @@
                     </div>
                     <div class="col-md 10 col-sm-9 col-9">
                       <div class="dashboard-card-title">
-                        Hi Zayus, sekarang kamu sebagai
+                        Hi {{ Auth::user()->name }}, sekarang kamu sebagai
                       </div>
                       <div class="dashboard-card-subtitle-user">
                         Member Kekraf
@@ -46,11 +50,12 @@
                   <div class="d-flex">
                     <div class="mr-2 dashboard-card-title">Transaksi</div>
                     <div class="dashboard-card-title-select">
-                      Selama 2021
+                      Selama {{ $year }}
                     </div>
                   </div>
                   <div class="dashboard-card-subtitle-user">
-                    Rp 300,000
+                    Rp {{ number_format($transactionPrice) }}
+                    
                   </div>
                 </div>
               </div>
@@ -60,7 +65,8 @@
           <div class="row">
             <div class="col-12 mt-2">
               <h2 class="section-title">Riwayat Transaksi</h2>
-              <div class="card">
+              <p class="text-center">Masih dalam tahap pengembangan</p>
+              {{-- <div class="card">
                 <div class="card-body">
                   <div class="d-flex">
                     <div class="info-card-transaction mr-2">
@@ -177,7 +183,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
               
             </div>
           </div>

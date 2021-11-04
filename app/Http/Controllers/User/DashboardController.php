@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -16,7 +17,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.user.dashboard-user');
+        $year = date('Y');
+        $transactionPrice = Transaction::where([
+            ['created_at', 'like', "%".$year."%"],
+            ['users_id', '=', Auth::user()->id]
+        ])->sum('total_price');
+        return view('pages.user.dashboard-user', [
+            'transactionPrice' => $transactionPrice,
+            'year' => $year
+        ]);
     }
 
     public function openStore(Request $request)

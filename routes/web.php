@@ -110,7 +110,9 @@ Route::prefix('user')
         Route::post('/', 'DashboardController@openStore')->name('dashboard-user-openStore');
         Route::resource('transaction-user', 'TransactionController');
         Route::resource('payment', 'PaymentController');
-        Route::resource('account', 'AccountController');
+        Route::get('account', 'AccountController@index')->name('user-account');
+        Route::post('/dashboard/account/{redirect}', 'AccountController@update')
+        ->name('user-setting-redirect');
     });
 
 Route::get('/loghome', function(){

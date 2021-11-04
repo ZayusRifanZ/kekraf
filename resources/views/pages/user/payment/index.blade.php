@@ -15,7 +15,7 @@
       <div class="section-body">
         <div class="dashboard-content">
           <h2 class="section-title">Menunggu Pembayaran</h2> 
-          <div class="card">
+          {{-- <div class="card">
             <div class="card-body">
               <div class="row justify-content-between mb-2">
                 <div class="col-sm-4 info-card-transaction">
@@ -77,12 +77,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> --}}
 
           
           
           {{-- // jika field kosong --}}
-          {{-- <div class="card">
+          <div class="card">
             <div class="card-body">
               <div class="row justify-content-center">
                 <div class="col-sm-5 text-center">
@@ -99,13 +99,13 @@
                     belanja dan dan penuhi kebutuhan !
                   </div>
 
-                  <a href="" class="btn btn-primary mt-3 pr-4 pl-4 mb-5"
+                  <a href="{{ route('home') }}" class="btn btn-primary mt-3 pr-4 pl-4 mb-5"
                     >Mulai Belanja</a
                   >
                 </div>
               </div>
             </div>
-          </div> --}}
+          </div>
           <div class="row"></div>
         </div>
       </div>

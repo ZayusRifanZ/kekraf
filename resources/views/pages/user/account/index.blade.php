@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.user')
 
 @section('title')
   Kekraf - Dashboard Account Setting
@@ -27,7 +27,7 @@
               <div class="card">
                 
                 <form 
-                  action="{{ route('dashboard-setting-redirect', 'dashboard-setting-account') }}" 
+                  action="{{ route('user-setting-redirect', 'user-account') }}" 
                   method="POST"
                   enctype="multipart/form-data"
                   id="locations">
@@ -35,7 +35,13 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-3">
-                        <img src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}" alt="" class="w-100" />
+                        <img 
+                          @if (isset(Auth::user()->profile_photo))
+                          src="{{ Storage::url(Auth::user()->profile_photo ?? '') }}" 
+                          @else
+                          src="/images/user_default.svg" 
+                          @endif
+                          alt="" class="w-100" />
                         <input
                           type="file"
                           id="file"

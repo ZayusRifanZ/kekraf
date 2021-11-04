@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('title')
-    Kekraf - Dashboard
+    Kekraf - Transaction user
 @endsection
 
 @section('content')
@@ -16,7 +16,8 @@
         <div class="dashboard-content">
           <div class="row">
             <div class="col">
-              <div class="card">
+              <p class="text-center">Filter cari dan sorting tanggal dalam pengembangan</p>
+              {{-- <div class="card">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-6">
@@ -60,14 +61,15 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
 
           <div class="row">
             <div class="col-12">
               <h2 class="section-title">Riwayat Semua Transaksi</h2>
-              <div class="card">
+              <p class="text-center">Masih dalam tahap pengembangan</p>
+              {{-- <div class="card">
                 <div class="card-body">
                   <div class="d-flex">
                     <div class="info-card-transaction mr-2">
@@ -184,7 +186,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
