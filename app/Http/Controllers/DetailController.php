@@ -37,12 +37,23 @@ class DetailController extends Controller
 
     public function add(Request $request, $id)
     {
-        $data = [
-            'products_id' => $id,
-            'users_id' => Auth::user()->id
-        ];
-
-        Cart::create($data);
+        $cart = Cart::where([
+            ['products_id', $id],
+            ['users_id', Auth::user()->id]
+        ]);
+        
+        if ($cart->count()) {
+            $data = $cart->increment('qty');
+        }
+        else {
+            $data = [
+                'products_id' => $id,
+                'users_id' => Auth::user()->id,
+                'qty' => 1,
+                'store_name' => $request->store_name
+            ];
+            Cart::create($data);
+        }
 
         return redirect()->route('cart')->with('message', 'Produk berhasil ditambahkan ke keranjang belanja');
 

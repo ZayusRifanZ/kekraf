@@ -37,15 +37,17 @@ Route::get('/register/success', function(){
 
 Route::get('/store/{id}', 'HomeController@storeProduct')->name('store-product');
 
-
-Route::group(['middleware' => ['auth', 'store']], function(){
+Route::group(['middleware' => ['auth']], function(){
     Route::get('/cart', 'CartController@index')
         ->name('cart');
     Route::delete('/cart/{id}', 'CartController@delete')
         ->name('cart-delete');
     Route::post('/checkout', 'CheckoutController@process')
         ->name('checkout');
+});
 
+
+Route::group(['middleware' => ['auth', 'store']], function(){
     Route::get('/dashboard', 'DashboardController@index')
         ->name('dashboard');
 

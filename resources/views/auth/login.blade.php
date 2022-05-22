@@ -60,9 +60,9 @@
                 <div class="form-group text-right">
                   @if (Route::has('password.request'))
                     <a 
-                      class="btn btn-link " 
+                      class="btn a-link-color " 
                       href="{{ route('password.request') }}"
-                      style="color: #3e6bb3">
+                    >
                       {{ __('Lupa Kata Sandi?') }}
                     </a>
                   @endif

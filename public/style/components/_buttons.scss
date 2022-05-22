@@ -3,60 +3,64 @@ $culturedColor: #f4f4f4;
 $coolGray: #8693a9;
 
 .btn-primary {
-  @include button-variant(
-    $primaryColor,
-    darken($primaryColor, 7.5%),
-    darken($primaryColor, 10%),
-    lighten($primaryColor, 5%),
-    lighten($primaryColor, 10%),
-    darken($primaryColor, 30%)
-  );
+    @include button-variant(
+        $primaryColor,
+        darken($primaryColor, 7.5%),
+        darken($primaryColor, 10%),
+        lighten($primaryColor, 5%),
+        lighten($primaryColor, 10%),
+        darken($primaryColor, 30%)
+    );
+}
+
+.a-link-color {
+    color: color("primary");
 }
 
 .btn-cultured {
-  @include button-variant($culturedColor, transparent);
-  color: $coolGray;
+    @include button-variant($culturedColor, transparent);
+    color: $coolGray;
 }
 .navbar {
-  .btn-primary {
-    @include button-variant(
-      $primaryColor,
-      darken($primaryColor, 7.5%),
-      darken($primaryColor, 10%),
-      lighten($primaryColor, 5%),
-      lighten($primaryColor, 10%),
-      darken($primaryColor, 30%)
-    );
-    margin-top: 8px;
-    color: #fff !important;
+    .btn-primary {
+        @include button-variant(
+            $primaryColor,
+            darken($primaryColor, 7.5%),
+            darken($primaryColor, 10%),
+            lighten($primaryColor, 5%),
+            lighten($primaryColor, 10%),
+            darken($primaryColor, 30%)
+        );
+        margin-top: 8px;
+        color: #fff !important;
 
-    @include media-breakpoint-up(lg) {
-      width: 80px;
-    }
+        @include media-breakpoint-up(lg) {
+            width: 80px;
+        }
 
-    @include media-breakpoint-down(md) {
-      margin-top: 10px;
-    }
-  }
-
-  .btn-outline-primary {
-    @include button-outline-variant(
-      $primaryColor,
-      #222,
-      lighten($primaryColor, 5%),
-      $primaryColor
-    );
-    margin-top: 8px;
-    color: $primaryColor !important;
-    &:hover {
-      color: #fff !important;
+        @include media-breakpoint-down(md) {
+            margin-top: 10px;
+        }
     }
 
-    @include media-breakpoint-up(lg) {
-      width: 80px;
+    .btn-outline-primary {
+        @include button-outline-variant(
+            $primaryColor,
+            #222,
+            lighten($primaryColor, 5%),
+            $primaryColor
+        );
+        margin-top: 8px;
+        color: $primaryColor !important;
+        &:hover {
+            color: #fff !important;
+        }
+
+        @include media-breakpoint-up(lg) {
+            width: 80px;
+        }
+        @include media-breakpoint-down(md) {
+            margin-top: 10px;
+        }
     }
-    @include media-breakpoint-down(md) {
-      margin-top: 10px;
-    }
-  }
 }

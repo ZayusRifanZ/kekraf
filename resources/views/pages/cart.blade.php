@@ -50,90 +50,63 @@
                 <tr>
                   <th scope="col">Gambar</th>
                   <th scope="col">Produk &amp; Seller</th>
+                  <th scope="col">Berat &amp; Qty</th>
                   <th scope="col">Harga</th>
                   <th scope="col">Menu</th>
                 </tr>
               </thead>
+              @php $total_price = 0; @endphp
+              @for ($i = 0; $i < $count_store; $i++)
               <tbody>
-                @php $total_price = 0; @endphp
+                @foreach ($carts as $cart )
+                  @if ($cart->product->user->store_name === $store_name_arr[$i])                      
+                    <tr>
+                      <td style="width: 15%">
+                        @if ($cart->product->galleries)
+                          <img
+                            src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
+                            alt=""
+                            class="cart-image"
+                          />
+                        @else
+                          <img src="/images/bgHexEEE.png" alt="" class="cart-image">
+                        @endif
+                      </td>
+                      <td style="width: 35%">
+                        <div class="product-title">{{ $cart->product->name }}</div>
+                        <div class="product-subtitle">Toko {{ $cart->product->user->store_name }}</div>
+                      </td>
+                      <td style="width: 15%">
+                        <div class="product-title">{{ $cart->qty }}</div>
+                        <div class="product-subtitle">{{ $cart->product->weight * $cart->qty }} gram</div>
+                      </td>
+                      <td style="width: 20%">
+                        <div class="product-title">Rp {{ number_format($cart->product->price * $cart->qty) }}</div>
+                        <div class="product-subtitle">IDR</div>
+                      </td>
+                      <td style="width: 15%">
+                        <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                          @method('DELETE')
+                          @csrf
+                          <button type="submit" class="btn btn-romove-cart">
+                            Hapus 
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                  @endif
 
-                @foreach ($carts as $cart)
-                  <tr>
-                    <td style="width: 20%">
-                      @if ($cart->product->galleries)
-                        <img
-                          src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
-                          alt=""
-                          class="cart-image"
-                        />
-                      @else
-                        <img src="/images/bgHexEEE.png" alt="" class="cart-image">
-                      @endif
-                    </td>
-                    <td style="width: 35%">
-                      <div class="product-title">{{ $cart->product->name }}</div>
-                      <div class="product-subtitle">Toko {{ $cart->user->store_name }}</div>
-                    </td>
-                    <td style="width: 35%">
-                      <div class="product-title">Rp {{ number_format($cart->product->price) }}</div>
-                      <div class="product-subtitle">IDR</div>
-                    </td>
-                    <td style="width: 20%">
-                      <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-romove-cart">
-                          Hapus 
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-
-                  @php $total_price += $cart->product->price; @endphp
-
+                  
+                  @php $total_price += $cart->product->price * $cart->qty; @endphp                      
                 @endforeach
-
-                {{-- <tr>
-                  <td style="width: 20%">
-                    <img
-                      src="/images/CocaCola.jpg"
-                      alt=""
-                      class="cart-image"
-                    />
-                  </td>
-                  <td style="width: 35%">
-                    <div class="product-title">CocaCola</div>
-                    <div class="product-subtitle">Toko drinkandfood</div>
-                  </td>
-                  <td style="width: 35%">
-                    <div class="product-title">Rp 12.000</div>
-                    <div class="product-subtitle">IDR</div>
-                  </td>
-                  <td style="width: 20%">
-                    <a href="#" class="btn btn-romove-cart">Hapus </a>
+                <tr style="background-color: #f66571">
+                  <td colspan="5" class="text-center text-white rounded-lg">
+                    Rincian pengiriman harus diisi
                   </td>
                 </tr>
-                <tr>
-                  <td style="width: 20%">
-                    <img
-                      src="/images/QuokkaBotolKopi.jpg"
-                      alt=""
-                      class="cart-image"
-                    />
-                  </td>
-                  <td style="width: 35%">
-                    <div class="product-title">Quokka Botol Minum Kopi</div>
-                    <div class="product-subtitle">Toko Quokka_store</div>
-                  </td>
-                  <td style="width: 35%">
-                    <div class="product-title">Rp 300.000</div>
-                    <div class="product-subtitle">IDR</div>
-                  </td>
-                  <td style="width: 20%">
-                    <a href="#" class="btn btn-romove-cart">Hapus </a>
-                  </td>
-                </tr> --}}
               </tbody>
+              @endfor
+              
             </table>
           </div>
         </div>
@@ -265,6 +238,87 @@
               </button>
             </div>
           </div>
+
+          {{-- <div class="row" data-aos="fade-up" data-aos-delay="150">
+            <div class="col-12">
+              <hr />
+            </div>
+            <div class="col-12">
+              <h2 class="mb-2">Rincian Pembayaran</h2>
+            </div>
+          </div> --}}
+          {{-- <div class="row justify-content-between" data-aos="fade-up" data-aos-delay="200">
+            <div class="card">
+              <div class="card-body">
+
+                <div class="col-6 col-md-4">
+                  <div class="product-title">
+                    Total harga (2 barang) : 
+                    Rp {{ number_format($total_price ?? 0) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 ">
+              <button 
+                type="submit"
+                class="btn btn-success btn-block"
+              >
+                Pesan Sekarang
+              </button>
+            </div>
+          </div> --}}
+
+          <div class="row" data-aos="fade-up" data-aos-delay="150">
+            <div class="col-7">
+              <h2 class="mb-2">Alamat pengiriman</h2>
+            </div>
+            <div class="col-5">
+              <h2 class="mb-2">Rincian Pembayaran</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-7">
+              <div class="card">
+                <div class="card-body">
+                  {{ Auth::user()->phone_number }} <br>
+                  <small>
+                    {{ Auth::user()->address_one }}, 
+                    {{ Auth::user()->address_two }},
+                    {{ App\Models\Regency::find( Auth::user()->regencies_id )->name }},
+                    {{ App\Models\Province::find(Auth::user()->provinces_id)->name }},
+                    {{ Auth::user()->country }}, <br>
+                    {{ App\Models\Regency::find( Auth::user()->regencies_id )->name }}, 
+                    {{ Auth::user()->zip_code }}
+                  </small>
+                  <br>
+                  <button class="btn btn-primary btn-sm mt-2">Ubah alamat</button>
+                  
+                </div>
+              </div>
+            </div>
+            @php
+                $cart = \App\Cart::where('users_id', Auth::user()->id)->sum('qty');
+            @endphp
+            <div class="col-5">
+              <div class="card">
+                <div class="card-body">
+                  <div class="product-subtitle">Total harga ({{ $cart ?? 0 }} barang)</div>
+                  <div class="product-title text-primary">
+                    Rp {{ number_format($total_price ?? 0) }}
+                  </div>
+                </div>
+              </div>
+              <button 
+                type="submit"
+                class="btn btn-primary btn-block"
+              >
+                Pesan Sekarang
+              </button>                
+            </div>
+          </div>
+
+          {{-- </div> --}}
         </form>
         
       </div>

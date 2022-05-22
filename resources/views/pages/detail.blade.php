@@ -94,6 +94,7 @@
             @auth
               <form action="{{ route('detail-add', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="store_name" value="{{ $product->user->store_name }}">
                 <button
                   type="submit"
                   class="btn btn-custom-primary px-4 text-white btn-block mb-3"

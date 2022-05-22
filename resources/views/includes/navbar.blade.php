@@ -58,7 +58,7 @@
           <li class="nav-item">
             <a href="{{ route('cart') }}" class="nav-link d-inline-block mt-2">
               @php
-                  $cart = \App\Cart::where('users_id', Auth::user()->id)->count();
+                  $cart = \App\Cart::where('users_id', Auth::user()->id)->sum('qty');
               @endphp
               @if ($cart > 0)
                 <img src="/images/cart icon.svg" alt="" />
