@@ -1,4 +1,6 @@
 @extends('layouts.app')
+{{-- modal --}}
+@extends('includes.modals.changeShippingAddress')
 
 @section('title')
     Kekraf - Cart
@@ -99,9 +101,57 @@
                   
                   @php $total_price += $cart->product->price * $cart->qty; @endphp                      
                 @endforeach
-                <tr style="background-color: #f66571">
+                {{-- <tr style="background-color: #f66571">
                   <td colspan="5" class="text-center text-white rounded-lg">
                     Rincian pengiriman harus diisi
+                  </td>
+                </tr> --}}
+                <tr class="bg-success">
+                  <td colspan="5" class="text-white">
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="kurir">Kurir </label>
+                          </div>
+                          <select class="custom-select" id="kurir">
+                            <option selected>Choose...</option>
+                            <option value="1">JNE</option>
+                            <option value="2">TIKI</option>
+                            <option value="3">POS</option>
+                          </select>
+                        </div>
+                        
+                      </div>
+                      <div class="col-5">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <label class="input-group-text" for="layanan">Jenis Layanan</label>
+                          </div>
+                          <select class="custom-select" id="layanan">
+                            <option selected>Choose...</option>
+                            <option value="">Reguler Service</option>
+                            <option value="">ONS (Over Night Service)</option>
+                            <option value="">Paket Kitat Khusus</option>
+                          </select>
+                        </div>
+                        
+                      </div>
+                      <div class="col-3">
+                        <label for="" class="text-white">Ongkir : +Rp90.000</label>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5">
+                    <div class="row">
+                      <div class="col">
+                        Lorem ipsum dolor sit amet
+                      </div>
+                      <div class="col">consectetur adipisicing elit. Fugiat, necessitatibus animi dolor iusto voluptates explicabo eaque quo ullam illo possimus</div>
+                      <div class="col">consectetur adipisicing elit. Fugiat, necessitatibus animi dolor iusto voluptates explicabo eaque quo ullam illo possimus</div>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -110,15 +160,73 @@
             </table>
           </div>
         </div>
+
+        
+        
+
         <div class="row" data-aos="fade-up" data-aos-delay="150">
+          <div class="col-7">
+            <h2 class="mb-2">Alamat pengiriman</h2>
+          </div>
+          <div class="col-5">
+            <h2 class="mb-2">Rincian Pembayaran</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+            <div class="card">
+              <div class="card-body">
+                <span>
+                  {{ $user->phone_number }} 
+                </span> <br>
+                <span>
+                  {{ $addres_detail }}
+                </span> <br>
+                <span>
+                  {{ $city }}, 
+                  {{ $user->zip_code }} 
+                </span>
+                <br>
+                <button 
+                  class="btn btn-primary btn-sm mt-2" 
+                  data-toggle="modal" 
+                  data-target="#changeShippingAddress"
+                >
+                  Ubah alamat
+                </button>
+              </div>
+            </div>
+          </div>
+          @php
+            $cart = \App\Cart::where('users_id', Auth::user()->id)->sum('qty');
+          @endphp
+          <div class="col-5">
+            <div class="card">
+              <div class="card-body">
+                <div class="product-subtitle">Total harga ({{ $cart ?? 0 }} barang)</div>
+                <div class="product-title text-primary">
+                  Rp {{ number_format($total_price ?? 0) }}
+                </div>
+              </div>
+            </div>
+            <button 
+              type="submit"
+              class="btn btn-primary btn-block"
+            >
+              Pesan Sekarang
+            </button>                
+          </div>
+        </div>
+
+        {{-- <div class="row" data-aos="fade-up" data-aos-delay="150">
           <div class="col-12">
             <hr />
           </div>
           <div class="col-12">
             <h2 class="mb-4">Rincian Pengiriman</h2>
           </div>
-        </div>
-        <form action="{{ route('checkout') }}" id="locations" enctype="multipart/form-data" method="POST">
+        </div> --}}
+        {{-- <form action="{{ route('checkout') }}" id="locations" enctype="multipart/form-data" method="POST">
           @csrf
           <input type="hidden" name="total_price" value="{{ $total_price }}">
           <div class="row mb-2" data-aos="fade-up" data-aos-delay="200" >
@@ -130,7 +238,7 @@
                   class="form-control"
                   id="address_one"
                   name="address_one"
-                  value="Setra Duta Cemara"
+                  value="{{ $user->address_one }}"
                 />
               </div>
             </div>
@@ -142,7 +250,7 @@
                   class="form-control"
                   id="address_two"
                   name="address_two"
-                  value="Blok B2 No. 34"
+                  value="{{ $user->address_one }}"
                 />
               </div>
             </div>
@@ -239,87 +347,8 @@
             </div>
           </div>
 
-          {{-- <div class="row" data-aos="fade-up" data-aos-delay="150">
-            <div class="col-12">
-              <hr />
-            </div>
-            <div class="col-12">
-              <h2 class="mb-2">Rincian Pembayaran</h2>
-            </div>
-          </div> --}}
-          {{-- <div class="row justify-content-between" data-aos="fade-up" data-aos-delay="200">
-            <div class="card">
-              <div class="card-body">
-
-                <div class="col-6 col-md-4">
-                  <div class="product-title">
-                    Total harga (2 barang) : 
-                    Rp {{ number_format($total_price ?? 0) }}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-md-3 ">
-              <button 
-                type="submit"
-                class="btn btn-success btn-block"
-              >
-                Pesan Sekarang
-              </button>
-            </div>
-          </div> --}}
-
-          <div class="row" data-aos="fade-up" data-aos-delay="150">
-            <div class="col-7">
-              <h2 class="mb-2">Alamat pengiriman</h2>
-            </div>
-            <div class="col-5">
-              <h2 class="mb-2">Rincian Pembayaran</h2>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-7">
-              <div class="card">
-                <div class="card-body">
-                  {{ Auth::user()->phone_number }} <br>
-                  <small>
-                    {{ Auth::user()->address_one }}, 
-                    {{ Auth::user()->address_two }},
-                    {{ App\Models\Regency::find( Auth::user()->regencies_id )->name }},
-                    {{ App\Models\Province::find(Auth::user()->provinces_id)->name }},
-                    {{ Auth::user()->country }}, <br>
-                    {{ App\Models\Regency::find( Auth::user()->regencies_id )->name }}, 
-                    {{ Auth::user()->zip_code }}
-                  </small>
-                  <br>
-                  <button class="btn btn-primary btn-sm mt-2">Ubah alamat</button>
-                  
-                </div>
-              </div>
-            </div>
-            @php
-                $cart = \App\Cart::where('users_id', Auth::user()->id)->sum('qty');
-            @endphp
-            <div class="col-5">
-              <div class="card">
-                <div class="card-body">
-                  <div class="product-subtitle">Total harga ({{ $cart ?? 0 }} barang)</div>
-                  <div class="product-title text-primary">
-                    Rp {{ number_format($total_price ?? 0) }}
-                  </div>
-                </div>
-              </div>
-              <button 
-                type="submit"
-                class="btn btn-primary btn-block"
-              >
-                Pesan Sekarang
-              </button>                
-            </div>
-          </div>
-
-          {{-- </div> --}}
-        </form>
+          
+        </form> --}}
         
       </div>
     </section>

@@ -35,6 +35,9 @@ Route::get('/register/success', function(){
     return view('auth.success');
 });
 
+Route::get('/cartcoba', 'CartController@coba') ;
+Route::post('/cartcoba/post', 'CartController@cobapost')->name('coba-post');
+
 Route::get('/store/{id}', 'HomeController@storeProduct')->name('store-product');
 
 Route::group(['middleware' => ['auth']], function(){

@@ -9,6 +9,8 @@ use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Kavist\RajaOngkir\Facades\RajaOngkir;
+
 class CartController extends Controller
 {
     /**
@@ -21,6 +23,17 @@ class CartController extends Controller
         $carts = Cart::with(['product.galleries', 'product.user'])
             ->where('users_id', Auth::user()->id)
             ->get();
+        $user = Auth::user();
+        $province = Province::find($user->provinces_id)->name;
+        $city = Regency::find($user->regencies_id)->name;
+        $addres_detail = 
+            $user->address_one. ', '.
+            $user->address_two. ', '. 
+            $city. ', '.
+            $province. ', '.
+            $user->country;
+        // $echo_br =
+        //  echo ("<br>");
 
         $arr = [];
         foreach ($carts as $key => $cart) {
@@ -40,11 +53,22 @@ class CartController extends Controller
         //     dump('hhhhhhhhh');
         // }
 
+        $daftarProvinsi = RajaOngkir::ongkosKirim([
+            'origin'        => 155,     // ID kota/kabupaten asal
+            'destination'   => Regency::find(Auth::user()->regencies_id)->id_rj_ongkir,      // ID kota/kabupaten tujuan
+            'weight'        => 1300,    // berat barang dalam gram
+            'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ]);
         
+        // dd(Regency::find(Auth::user()->regencies_id)->id_rj_ongkir);
         return view('pages.cart', [
             'carts' => $carts,
             'store_name_arr' => $store_name_arr,
-            'count_store' => $count_store
+            'count_store' => $count_store,
+            'user' => $user,
+            'provinsi' => $province,
+            'city' => $city,
+            'addres_detail' => $addres_detail
         ]);
     }
 
@@ -59,8 +83,23 @@ class CartController extends Controller
         return view('pages.success');
     }
 
-    function coba()
+    public function coba()
     {
-        return 'hai nama ku zayus ';
+        $city = Regency::all();
+        $daftarProvinsi = RajaOngkir::ongkosKirim([
+            'origin'        => 155,     // ID kota/kabupaten asal
+            'destination'   => 80,      // ID kota/kabupaten tujuan
+            'weight'        => 1300,    // berat barang dalam gram
+            'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        ]);
+        // dd($daftarProvinsi);
+        return view('pages.tesaja', [
+            'city' => $city,
+        ]);
+    }
+    public function cobapost(Request $request){
+        $data = $request->all();
+        $select = $request->input('select');
+        dd($data, $select);
     }
 }
