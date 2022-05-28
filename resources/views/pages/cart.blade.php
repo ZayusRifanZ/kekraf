@@ -143,17 +143,6 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td colspan="5">
-                    <div class="row">
-                      <div class="col">
-                        Lorem ipsum dolor sit amet
-                      </div>
-                      <div class="col">consectetur adipisicing elit. Fugiat, necessitatibus animi dolor iusto voluptates explicabo eaque quo ullam illo possimus</div>
-                      <div class="col">consectetur adipisicing elit. Fugiat, necessitatibus animi dolor iusto voluptates explicabo eaque quo ullam illo possimus</div>
-                    </div>
-                  </td>
-                </tr>
               </tbody>
               @endfor
               
