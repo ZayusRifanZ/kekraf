@@ -19,4 +19,9 @@ class LocationController extends Controller
     {
         return Regency::where('province_id', $provinces_id)->get();
     }
+
+    public function allCity(Request $request) 
+    {
+        return Regency::all();
+    }
 }

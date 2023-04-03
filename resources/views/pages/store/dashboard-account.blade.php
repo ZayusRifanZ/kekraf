@@ -190,6 +190,53 @@
                       </div>
                     </div>
                   </div>
+{{-- 
+                  <div class="card-body">
+                    <div class="row bg-warning">
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <label for="">Nama</label>
+                          <p> {{ $user->name }}</p>
+                        </div>
+                        <div class="form-group">
+                          <label for="">Email</label>
+                          <p> {{ $user->email }}</p>
+                        </div>
+                        <div class="form-group">
+                          <label for="phone_number">No. Telepon</label>
+                          <p> {{ $user->phone_number }}</p>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="address_one">Alamat 1</label>
+                          <p>{{ $user->address_one }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="address_two">Alamat 2</label>
+                          <p>{{ $user->address_two }}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="provinces_id">Provinsi</label>
+                          <p> {{ $province_name }}</p>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="regencies_id">Kota</label>
+                          <p> {{ $regency_name }}</p>
+                        </div>
+                      </div>
+
+                      
+                    </div>
+                  </div> --}}
                 </form>
               </div>
             </div>

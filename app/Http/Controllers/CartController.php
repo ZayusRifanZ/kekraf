@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-
+use App\Courier;
 use App\Models\Regency;
 use App\Models\Province;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $carts = Cart::with(['product.galleries', 'product.user'])
             ->where('users_id', Auth::user()->id)
@@ -34,33 +35,41 @@ class CartController extends Controller
             $user->country;
         // $echo_br =
         //  echo ("<br>");
+        $couriers = Courier::all();
 
         $arr = [];
         foreach ($carts as $key => $cart) {
-            $arr[$key] = $cart->product->user->store_name;
+            $arr[] = $cart->product->user->store_name;
         }
-        // dump(array_count_values($arr));
+        // dd($arr);
+        // dd(array_count_values($arr));
         // dump(array_unique($arr));
         $count_store = count(array_count_values($arr));
         $store_name_arr = array_unique($arr);
+        // dd($count_store);
 
-        // for ($i=0; $i < $count_store; $i++) { 
+        // foreach ($store_name_arr as $key => $data) { 
         //     foreach ($carts as $cart) {
-        //         if ($cart->product->user->store_name === $store_name_arr[$i]) {
+        //         if ($cart->product->user->store_name === $data) {
         //             dump($cart->product->name.'<br>');
         //         }
         //     }
         //     dump('hhhhhhhhh');
-        // }
+        // } die;
 
-        $daftarProvinsi = RajaOngkir::ongkosKirim([
-            'origin'        => 155,     // ID kota/kabupaten asal
-            'destination'   => Regency::find(Auth::user()->regencies_id)->id_rj_ongkir,      // ID kota/kabupaten tujuan
-            'weight'        => 1300,    // berat barang dalam gram
-            'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
-        ]);
+        // $cekongkir = RajaOngkir::ongkosKirim([
+        //     'origin'        => Regency::find($request->input('locations_origin')),     // ID kota/kabupaten asal
+        //     'destination'   => Regency::find(Auth::user()->regencies_id)->id_rj_ongkir,      // ID kota/kabupaten tujuan
+        //     'weight'        => 1300,    // berat barang dalam gram
+        //     'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+        // ])->get()[0];
+        // dd($daftarProvinsi);
+        if (isset($request->kurir)) {
+            dd('hai berhasil', $request->kurir);
+        }
+        // $tes = new DOMDocument();
+        // dd($tes);
         
-        // dd(Regency::find(Auth::user()->regencies_id)->id_rj_ongkir);
         return view('pages.cart', [
             'carts' => $carts,
             'store_name_arr' => $store_name_arr,
@@ -68,7 +77,8 @@ class CartController extends Controller
             'user' => $user,
             'provinsi' => $province,
             'city' => $city,
-            'addres_detail' => $addres_detail
+            'addres_detail' => $addres_detail,
+            'couriers' => $couriers
         ]);
     }
 

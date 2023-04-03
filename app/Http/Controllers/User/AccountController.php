@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Province;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,9 +14,11 @@ class AccountController extends Controller
     public function index()
     {
         $user = Auth::user();
+        // $province_data = Province::find('id', $user->provinces_id);
         return view('pages.user.account.index', [
             'user' => $user,
         ]);
+        // dd($province_data);
     }
 
     public function update(Request $request, $redirect)

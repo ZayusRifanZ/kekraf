@@ -38,6 +38,10 @@ Route::get('/register/success', function(){
 Route::get('/cartcoba', 'CartController@coba') ;
 Route::post('/cartcoba/post', 'CartController@cobapost')->name('coba-post');
 
+Route::get('/tes', function (){
+    return view('pages.tes');
+});
+
 Route::get('/store/{id}', 'HomeController@storeProduct')->name('store-product');
 
 Route::group(['middleware' => ['auth']], function(){

@@ -57,94 +57,126 @@
                   <th scope="col">Menu</th>
                 </tr>
               </thead>
-              @php $total_price = 0; @endphp
-              @for ($i = 0; $i < $count_store; $i++)
-              <tbody>
-                @foreach ($carts as $cart )
-                  @if ($cart->product->user->store_name === $store_name_arr[$i])                      
-                    <tr>
-                      <td style="width: 15%">
-                        @if ($cart->product->galleries)
-                          <img
-                            src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
-                            alt=""
-                            class="cart-image"
-                          />
-                        @else
-                          <img src="/images/bgHexEEE.png" alt="" class="cart-image">
-                        @endif
+              @php $total_price = 0; @endphp 
+              @foreach ($store_name_arr as $data_store)
+                <tbody>
+                  @foreach ($carts as $cart )
+                    @if ($cart->product->user->store_name === $data_store)                      
+                      <tr>
+                        <td style="width: 15%">
+                          @if ($cart->product->galleries)
+                            <img
+                              src="{{ Storage::url($cart->product->galleries->first()->photos) }}"
+                              alt=""
+                              class="cart-image"
+                            />
+                          @else
+                            <img src="/images/bgHexEEE.png" alt="" class="cart-image">
+                          @endif
+                        </td>
+                        <td style="width: 35%">
+                          <div class="product-title">{{ $cart->product->name }}</div>
+                          <div class="product-subtitle">
+                            Toko {{ $cart->product->user->store_name }}
+                          </div>
+                          <div class="product-subtitle">
+                            kota {{ $cart->product->user->regencies_id }}
+                          </div>
+                        </td>
+                        <td style="width: 15%">
+                          <div class="product-title">{{ $cart->qty }}</div>
+                          <div class="product-subtitle">
+                            {{ $cart->product->weight * $cart->qty }} gram</div>
+                        </td>
+                        <td style="width: 20%">
+                          <div class="product-title">Rp {{ number_format($cart->product->price * $cart->qty) }}</div>
+                          <div class="product-subtitle">IDR</div>
+                        </td>
+                        <td style="width: 15%">
+                          <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-romove-cart">
+                              Hapus 
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    @endif
+
+                    
+                    @php $total_price += $cart->product->price * $cart->qty; @endphp                      
+                  @endforeach
+                  @if ($user->regencies_id == NULL)
+                    <tr style="background-color: #f66571">
+                      <td colspan="5" class="text-center text-white rounded-lg">
+                        Rincian pengiriman harus diisi
                       </td>
-                      <td style="width: 35%">
-                        <div class="product-title">{{ $cart->product->name }}</div>
-                        <div class="product-subtitle">Toko {{ $cart->product->user->store_name }}</div>
-                      </td>
-                      <td style="width: 15%">
-                        <div class="product-title">{{ $cart->qty }}</div>
-                        <div class="product-subtitle">{{ $cart->product->weight * $cart->qty }} gram</div>
-                      </td>
-                      <td style="width: 20%">
-                        <div class="product-title">Rp {{ number_format($cart->product->price * $cart->qty) }}</div>
-                        <div class="product-subtitle">IDR</div>
-                      </td>
-                      <td style="width: 15%">
-                        <form action="{{ route('cart-delete', $cart->id) }}" method="POST">
-                          @method('DELETE')
-                          @csrf
-                          <button type="submit" class="btn btn-romove-cart">
-                            Hapus 
-                          </button>
-                        </form>
+                    </tr>
+                  @else
+                    <tr class="bg-success">
+                      <td colspan="5" class="text-white">
+                        <div class="row">
+                          <div class="col-4">
+                            <form action="{{ route('cart') }}" method="GET">
+                              @csrf
+                              
+                              <input type="hidden" name="location_origin" value="{{ $carts->first->product->user->regencies_id }}">
+                              <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <label class="input-group-text" for="kurir">Kurir </label>
+                                </div>
+                               
+                                <select class="custom-select" id="kurir" name="kurir" onchange="this.form.submit()">
+                                  <option disabled selected>Pilih...</option>
+                                  @foreach ($couriers as $item)
+                                    <option value="{{ $item->code }}">{{ $item->title }}</option>
+                                  @endforeach
+                                </select>
+                                {{-- @php
+                                $dataongkir = RajaOngkir::ongkosKirim([
+                                  'origin'        => 12,     // ID kota/kabupaten asal
+                                  'destination'   => 12,      // ID kota/kabupaten tujuan
+                                  'weight'        => 1300,    // berat barang dalam gram
+                                  'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
+                                ]);
+                                $dom = new DOMDocument();
+                                $option_tag = $dom->getElementsByName('option');
+                                dd($option_tag);
+                              @endphp --}}
+                              </div>
+                            </form>
+                            
+                          </div>
+                          <div class="col-5">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <label class="input-group-text" for="layanan">Jenis Layanan</label>
+                              </div>
+                              <select class="custom-select" id="layanan">
+                                <option selected>Choose...</option>
+                                <option value="">Reguler Service</option>
+                                <option value="">ONS (Over Night Service)</option>
+                                <option value="">Paket Kitat Khusus</option>
+                              </select>
+                            </div>
+                            
+                          </div>
+                          <div class="col-3">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Ongkos Kirim</span>
+                              </div>
+                              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value=" +Rp90.000" disabled>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   @endif
-
-                  
-                  @php $total_price += $cart->product->price * $cart->qty; @endphp                      
-                @endforeach
-                {{-- <tr style="background-color: #f66571">
-                  <td colspan="5" class="text-center text-white rounded-lg">
-                    Rincian pengiriman harus diisi
-                  </td>
-                </tr> --}}
-                <tr class="bg-success">
-                  <td colspan="5" class="text-white">
-                    <div class="row">
-                      <div class="col-4">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <label class="input-group-text" for="kurir">Kurir </label>
-                          </div>
-                          <select class="custom-select" id="kurir">
-                            <option selected>Choose...</option>
-                            <option value="1">JNE</option>
-                            <option value="2">TIKI</option>
-                            <option value="3">POS</option>
-                          </select>
-                        </div>
-                        
-                      </div>
-                      <div class="col-5">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <label class="input-group-text" for="layanan">Jenis Layanan</label>
-                          </div>
-                          <select class="custom-select" id="layanan">
-                            <option selected>Choose...</option>
-                            <option value="">Reguler Service</option>
-                            <option value="">ONS (Over Night Service)</option>
-                            <option value="">Paket Kitat Khusus</option>
-                          </select>
-                        </div>
-                        
-                      </div>
-                      <div class="col-3">
-                        <label for="" class="text-white">Ongkir : +Rp90.000</label>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-              @endfor
+                </tbody>
+                
+              @endforeach
               
             </table>
           </div>
